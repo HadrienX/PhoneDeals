@@ -11,5 +11,7 @@ Membres du groupe :
 - Hadrien Rannou
 
 # Sources
-Documentation de Slim Framework http://www.slimframework.com/
-Documentation de Bootstrap http://getbootstrap.com/
+Documentation de Slim Framework
+http://www.slimframework.com/
+Documentation de Bootstrap
+http://getbootstrap.com/
