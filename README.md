@@ -9,3 +9,7 @@ Membres du groupe :
 - Aymeric Picot
 - Ange Kévin Zokpé
 - Hadrien Rannou
+
+# Sources
+Documentation de Slim Framework http://www.slimframework.com/
+Documentation de Bootstrap http://getbootstrap.com/
