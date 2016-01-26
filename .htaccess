@@ -1,2 +1,6 @@
 RewriteEngine On
+<<<<<<< HEAD
 RewriteRule (.*) public/$1 [L]
+=======
+RewriteRule (.*) public/$1 [L]
+>>>>>>> origin/master
