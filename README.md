@@ -11,8 +11,5 @@ Membres du groupe :
 - [Hadrien Rannou](https://github.com/HadrienX)
 
 # Sources
-Documentation de Slim Framework
-http://www.slimframework.com/
-
 Documentation de Bootstrap
 http://getbootstrap.com/
