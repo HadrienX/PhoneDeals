@@ -129,7 +129,7 @@ CREATE TABLE `order` (
   `member` int(11) NOT NULL,
   `date` date NOT NULL,
   `paid_price` double NOT NULL,
-  `paid_price_VAT` double NOT NULL,
+  `paid_price_vat` double NOT NULL,
   `sent_method` enum('normale','express') CHARACTER SET utf8 NOT NULL,
   `phone` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
