@@ -5,27 +5,16 @@
 			<div class="row">
 				<?php
 					foreach (Phone::getPhonesList() as $phone) {
-						echo '<div class="col-xs-12 col-md-4" style="text-align: center">';
-							echo '<div style="border: 1px solid #ededed; padding: 15px;>';
-								echo '<a href="index.php?page=product&id=' . $phone->id . '" class="thumbnail">';
-								echo '<img src="" alt="">';
-								echo $phone->name;
+						echo '<div class="col-md-4 col-sm-6 col-xs-12" style="text-align: center">';
+							echo '<div style="border: 1px solid #ededed; padding: 15px;">';
+								echo '<a href="index.php?page=product&id=' . $phone->id . '">';
+									echo '<img src="" alt="">';
+									echo '<h4>' . $phone->name . '</h4>';
 								echo '</a>';
+								echo '<span class="badge">' . $phone->price . ' &euro;</span>';
 							echo '</div>';
 						echo '</div>';
 					}
-
-					// echo '<pre>';
-					// 	var_dump($phonesList);
-					// echo '</pre>';
-
-					// $p = Phone::getPhonesList($id);
-					
-					// echo "<h1>{$p->name}</h1>";
-					
-					// foreach($p as $e) {
-					// 	echo "$e<br/>";
-					// }
 				?>
 			</div>
 		</div>
