@@ -8,6 +8,14 @@
 			}
 		}
 
+		public static function isLogged() {
+			if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
+				return true;
+			}
+
+			return false;
+		}
+
 		public static function error($log) {
 			echo '
 				<div class="erreur">
