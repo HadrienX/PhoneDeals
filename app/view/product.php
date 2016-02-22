@@ -62,10 +62,13 @@
 				console.log($(this).attr('value'));
 				var id = $(this).attr('value');
 				var lien = $('#phone_img').attr('src');
-				console.log(lien);
-				lien = lien.substring(0,lien.length-5);
-				lien = lien + id + '.jpg';
-				$('#phone_img').attr('src', lien);
+				var res = lien.split(/[-]/);
+				var link = "";
+				for(var i=0;i<res.length-1;i++){
+					link += res[i] + '-';
+				}
+				link += id + '.jpg';
+				$('#phone_img').attr('src', link);
 			})
 		});
 	</script>
