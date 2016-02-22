@@ -66,7 +66,7 @@
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="index.php?page=cart"><i class="fa fa-shopping-cart"></i> 0</a></li>
-						<?php if (isset($_SESSION['email']) && !empty($_SESSION['email'])) : ?>
+						<?php if (App::isLogged()) : ?>
 							<li class="dropdown">
 								<a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#" id="drop1">
 									Bonjour <?php echo $_SESSION['email']; ?>
