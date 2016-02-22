@@ -6,13 +6,10 @@
 					if (!isset($_GET['id'])) {
 						echo "Vous n'avez pas entré d'ID";
 					}
-
 					else {
 						$id = $_GET['id'];
 						$p = Phone::getPhoneById($id);
-
 						echo "<h1 style='text-align:center;''>{$p->name}</h1>";
-
 						echo '<div class="col-md-4 col-sm-6 col-xs-12" style="text-align: center; border: 1px solid #ededed; padding: 15px;">';
 							
 							echo '<span>';
@@ -22,12 +19,10 @@
 								echo '<div class="color" style="width:20px; height:20px; float:right; margin-right:5px; background-color:' . $c->hex . '; border:solid 1px silver;" onmouseover="this.style.cursor=\'pointer\';" onmouseout="this.style.cursor=\'\';"" value="' . $c->id . '"></div>';
 							}
 							echo '</span>';
-
 							echo '<a href="index.php?page=product&id=' . $p->id . '">';
 								echo '<img id="phone_img" src="' . Phone::getPhoneThumbnail($p->id) . '" alt="' . $p->name . '" style="width: 250px;">';
 							echo '</a>';
 						echo '</div>';
-
 						echo '<div class="col-md-4 col-sm-6 col-xs-12" style="border: 1px solid #ededed; padding: 15px;">';
 						$b = Brand::getBrandById($p->brand);
 						echo '<p>Marque : ' . $b->brand_name . '</p>';
@@ -35,7 +30,6 @@
 							echo "<p>$e</p>";
 						}
 						echo '</div>';
-
 						echo '<div class="col-md-4 col-sm-6 col-xs-12" style="text-align: center; border: 1px solid #ededed; padding: 15px;">';
 						echo '<span style="font-weight:bolder; font-size:3em;">' . $p->price . ' &euro;</span></br>';
 						echo '<span>Quantité : <select>';
@@ -58,15 +52,16 @@
 	</div>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$('.color').click(function(){
-				console.log($(this).attr('value'));
+			$('.color').click(function() {
 				var id = $(this).attr('value');
-				var lien = $('#phone_img').attr('src');
-				var res = lien.split(/[-]/);
-				var link = "";
-				for(var i=0;i<res.length-1;i++){
-					link += res[i] + '-';
+				var oldLink = $('#phone_img').attr('src');
+				var result = oldLink.split(/[-]/);
+				var link = '';
+
+				for (var i = 0; i < result.length - 1; i++) {
+					link += result[i] + '-';
 				}
+
 				link += id + '.jpg';
 				$('#phone_img').attr('src', link);
 			})
