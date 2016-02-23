@@ -67,13 +67,16 @@
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="index.php?page=cart"><i class="fa fa-shopping-cart"></i> 0</a></li>
 						<?php if (App::isLogged()) : ?>
+							<?php $member = Member::getMemberById($_SESSION['id']); ?>
 							<li class="dropdown">
 								<a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#" id="drop1">
-									Bonjour <?php echo $_SESSION['email']; ?>
+									<img src="<?php echo App::getGravatar($member->email, 20); ?>" alt="Avatar de <?php echo $member->first_name; ?>" style="margin-right: 5px;" />
+									<?php echo $member->first_name; ?>
 									<span class="caret"></span>
 								</a>
 								<ul aria-labelledby="drop1" class="dropdown-menu">
 									<li><a href="index.php?page=profile">Profil</a></li>
+									<li><a href="index.php?page=orders">Mes commandes</a></li>
 								</ul>
 							</li>
 	                        <li><a href="index.php?page=signout">Déconnexion</a></li>
