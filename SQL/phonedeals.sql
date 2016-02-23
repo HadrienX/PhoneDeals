@@ -1,20 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.14
+-- version 4.4.10
 -- http://www.phpmyadmin.net
 --
--- Client :  127.0.0.1
--- Généré le :  Dim 21 Février 2016 à 23:51
--- Version du serveur :  5.6.17
--- Version de PHP :  5.5.12
+-- Client :  localhost:3306
+-- Généré le :  Mar 23 Février 2016 à 22:40
+-- Version du serveur :  5.5.42
+-- Version de PHP :  7.0.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
 
 --
 -- Base de données :  `phonedeals`
@@ -26,11 +20,10 @@ SET time_zone = "+00:00";
 -- Structure de la table `brand`
 --
 
-CREATE TABLE IF NOT EXISTS `brand` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `brand_name` varchar(128) CHARACTER SET utf8 NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+CREATE TABLE `brand` (
+  `id` int(11) NOT NULL,
+  `brand_name` varchar(128) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `brand`
@@ -51,11 +44,10 @@ INSERT INTO `brand` (`id`, `brand_name`) VALUES
 -- Structure de la table `capacity`
 --
 
-CREATE TABLE IF NOT EXISTS `capacity` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `storage` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+CREATE TABLE `capacity` (
+  `id` int(11) NOT NULL,
+  `storage` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `capacity`
@@ -73,12 +65,11 @@ INSERT INTO `capacity` (`id`, `storage`) VALUES
 -- Structure de la table `color`
 --
 
-CREATE TABLE IF NOT EXISTS `color` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `color` (
+  `id` int(11) NOT NULL,
   `name` varchar(128) NOT NULL,
-  `hex` varchar(7) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
+  `hex` varchar(7) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `color`
@@ -87,14 +78,14 @@ CREATE TABLE IF NOT EXISTS `color` (
 INSERT INTO `color` (`id`, `name`, `hex`) VALUES
 (1, 'Noir', '#000'),
 (2, 'Blanc', '#fff'),
-(3, 'Bleu', '#1c63df'),
+(3, 'Bleu', '#3aabe5'),
 (4, 'Rouge', '#e3161d'),
 (5, 'Jaune', '#f8dd08'),
-(6, 'Vert', '#a0e86d'),
-(7, 'Rose', '#fd7071'),
+(6, 'Vert', '#96e264'),
+(7, 'Rose', '#fe6868'),
 (8, 'Marron', '#5c4745'),
-(9, 'Or', '#ffd700'),
-(10, 'Or Rose', '#cfa8a1'),
+(9, 'Or', '#e3d0ba'),
+(10, 'Or Rose', '#edccbd'),
 (11, 'Argent', '#d0d0d4'),
 (12, 'Gris sidéral', '#9b9ba0'),
 (13, 'Bordeaux', '#54161f'),
@@ -106,8 +97,8 @@ INSERT INTO `color` (`id`, `name`, `hex`) VALUES
 -- Structure de la table `member`
 --
 
-CREATE TABLE IF NOT EXISTS `member` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `member` (
+  `id` int(11) NOT NULL,
   `first_name` varchar(128) CHARACTER SET utf8 NOT NULL,
   `last_name` varchar(128) CHARACTER SET utf8 NOT NULL,
   `email` varchar(128) CHARACTER SET utf8 NOT NULL,
@@ -118,16 +109,16 @@ CREATE TABLE IF NOT EXISTS `member` (
   `city` varchar(128) CHARACTER SET utf8 NOT NULL,
   `zip_code` int(11) NOT NULL,
   `admin` tinyint(1) NOT NULL,
-  `register_date` date NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+  `register_date` date NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `member`
 --
 
 INSERT INTO `member` (`id`, `first_name`, `last_name`, `email`, `password`, `way_num`, `way_type`, `way_name`, `city`, `zip_code`, `admin`, `register_date`) VALUES
-(1, 'admin', 'admin', 'admin', 'admin', 0, 'Allée', '', '', 0, 1, '0000-00-00');
+(1, 'admin', 'admin', 'admin', '$2y$12$16dPm1hnmD4Yxb3rls12aezUhvdJnTUnaXUyzG8xMa7Zfj4GC2PgO', 0, 'Allée', '', '', 0, 1, '0000-00-00'),
+(2, 'Hadrien', 'Rannou', 'hadriien@live.fr', '$2y$12$J1uothrBpx2wmuGaFeSsKeMU70ltJUMMlXlj/c8JrDyzhcfoQJBmK', 24, 'Rue', 'Bois le Vent', 'Paris', 75016, 0, '2016-02-23');
 
 -- --------------------------------------------------------
 
@@ -135,19 +126,15 @@ INSERT INTO `member` (`id`, `first_name`, `last_name`, `email`, `password`, `way
 -- Structure de la table `order`
 --
 
-CREATE TABLE IF NOT EXISTS `order` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `order` (
+  `id` int(11) NOT NULL,
   `member` int(11) NOT NULL,
   `date` date NOT NULL,
   `paid_price` double NOT NULL,
   `paid_price_vat` double NOT NULL,
   `sent_method` enum('normale','express') CHARACTER SET utf8 NOT NULL,
-  `phone` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `member` (`member`,`phone`),
-  KEY `member_2` (`member`),
-  KEY `phone` (`phone`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `phone` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -155,19 +142,15 @@ CREATE TABLE IF NOT EXISTS `order` (
 -- Structure de la table `phone`
 --
 
-CREATE TABLE IF NOT EXISTS `phone` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `phone` (
+  `id` int(11) NOT NULL,
   `name` varchar(64) CHARACTER SET utf8 NOT NULL,
   `brand` int(11) NOT NULL,
   `capacity` varchar(16) CHARACTER SET utf8 NOT NULL,
   `price` double NOT NULL,
   `color` varchar(16) CHARACTER SET utf8 NOT NULL,
-  `description` text CHARACTER SET utf8 NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `brand` (`brand`,`capacity`,`color`),
-  KEY `brand_2` (`brand`),
-  KEY `capacity` (`capacity`,`color`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+  `description` text CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `phone`
@@ -177,7 +160,7 @@ INSERT INTO `phone` (`id`, `name`, `brand`, `capacity`, `price`, `color`, `descr
 (1, 'HTC One A9', 6, '16', 399, '11,12,13', 'Ecran 5" Full HD - 4G - Android™ 6.0 + HTC Sense™ - Processeur Octo-Core 4*1.5GHz&4*1.2GHz - Appareil Photo 13Mp Auto-Focus - ROM : 16 Go / RAM : 2 Go - Extensible par Micro SD jusqu''à 2 To - Nano SIM - DAS : Tête : 0.415 W/kg / Corps : 0.259 W/kg - Dolby Audio - Bluetooth 4.1 - Wi-Fi - Batterie 2150mAh - Double micro annulation du bruit - Garantie Constructeur : 2 Ans.'),
 (2, 'HTC One M9', 6, '32', 627, '7,9,11', 'Etui folio offert hors produit "C le marché" - Ecran 5" - 4G - Android Lollipop 5.0 avec HTC Sense - Processeur Octo Core 4*2.0Ghz + 4*1.5Ghz - Appareil Photo 20Mp - ROM : 32Go / RAM : 3Go - Extensible par Micro SD jusqu''à 128Go - Nano SIM - Bluetooth 4.1 - NFC - Batterie 2840mAh - Coque monobloc en aluminium à la finition deux tons - DAS : 0.518W/kg'),
 (3, 'iPhone 6S', 5, '16,64,128', 670, '9,10,11,12', 'Ecran 4.7'''' Retina HD - Résolution : 1334x750 - 7.1mm - Puce A9 avec coprocesseur de mouvement M9 - Architecture 64 bits - iOS 9 et iCloud - 4G LTE, Wi-Fi - NFC - Bluetooth - Appareil photo iSight 12Mps Tue Tone Flash, stabilisation optique de l’image - Enregistrement vidéo 4K / HD 1080p à 30 ou 60i/s - Caméra FaceTime HD - Touch ID Capteur d’empreinte digitale intégré au bouton principal'),
-(4, 'Xperia Z5', 4, '32,64,128', 679, '1,2,6,7,9', 'Le Xperia Z5 vous permet de saisir chaque occasion de réaliser une photo exceptionnelle, avant qu''elle ne vous   échappe. Grâce à sa fonction Autofocus hybride, notre téléphone avec le meilleur appareil photo à ce jour est un virtuose aussi rapide que précis. Associée à un capteur 23 mégapixels ainsi qu''à un puissant zoom 5x, elle permet au Xperia Z5 de capturer les instants les plus fugaces avec une netteté déconcertante, dès la première tentative.'),
+(4, 'Xperia Z5', 4, '32,64,128', 679, '1,2,6,10,9', 'Le Xperia Z5 vous permet de saisir chaque occasion de réaliser une photo exceptionnelle, avant qu''elle ne vous   échappe. Grâce à sa fonction Autofocus hybride, notre téléphone avec le meilleur appareil photo à ce jour est un virtuose aussi rapide que précis. Associée à un capteur 23 mégapixels ainsi qu''à un puissant zoom 5x, elle permet au Xperia Z5 de capturer les instants les plus fugaces avec une netteté déconcertante, dès la première tentative.'),
 (5, 'Xperia C4', 4, '16,32,64,128', 348, '1,2,3', 'Le Xperia C4, c’est un appareil photo principal 13 mégapixels ultraperformant   doublé d’un appareil photo avant 5 mégapixels avec flash LED et objectif grand angle. Vous êtes paré pour prendre des photos et des vidéos PROselfie.'),
 (6, 'Xperia E4g', 4, '16,32', 129, '1,2', 'Profitez d''un smartphone à prix accessible qui associe la 4G, un large écran lumineux et des composants puissants pour une expérience utilisateur optimale. '),
 (7, 'Xperia M', 4, '16,32', 215, '1,2,14', 'Le design fin et épuré de l''Xperia™ M, inspiré de l''Xperia™ Z saura vous convaincre. Il assure une fiabilité exemplaire intégrant Android 4.1 et un appareil photo de 5 mégapixels qui vous permettra de capturer vos meilleurs instants.'),
@@ -189,14 +172,111 @@ INSERT INTO `phone` (`id`, `name`, `brand`, `capacity`, `price`, `color`, `descr
 -- Structure de la table `promotion`
 --
 
-CREATE TABLE IF NOT EXISTS `promotion` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `promotion` (
+  `id` int(11) NOT NULL,
   `phone` int(11) NOT NULL,
-  `pourcent` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `phone` (`phone`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `percent` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
+--
+-- Contenu de la table `promotion`
+--
+
+INSERT INTO `promotion` (`id`, `phone`, `percent`) VALUES
+(1, 3, 10);
+
+--
+-- Index pour les tables exportées
+--
+
+--
+-- Index pour la table `brand`
+--
+ALTER TABLE `brand`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `capacity`
+--
+ALTER TABLE `capacity`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `color`
+--
+ALTER TABLE `color`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `member`
+--
+ALTER TABLE `member`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `order`
+--
+ALTER TABLE `order`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `member` (`member`,`phone`),
+  ADD KEY `member_2` (`member`),
+  ADD KEY `phone` (`phone`);
+
+--
+-- Index pour la table `phone`
+--
+ALTER TABLE `phone`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `brand` (`brand`,`capacity`,`color`),
+  ADD KEY `brand_2` (`brand`),
+  ADD KEY `capacity` (`capacity`,`color`);
+
+--
+-- Index pour la table `promotion`
+--
+ALTER TABLE `promotion`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `phone` (`phone`);
+
+--
+-- AUTO_INCREMENT pour les tables exportées
+--
+
+--
+-- AUTO_INCREMENT pour la table `brand`
+--
+ALTER TABLE `brand`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT pour la table `capacity`
+--
+ALTER TABLE `capacity`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT pour la table `color`
+--
+ALTER TABLE `color`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
+--
+-- AUTO_INCREMENT pour la table `member`
+--
+ALTER TABLE `member`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT pour la table `order`
+--
+ALTER TABLE `order`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `phone`
+--
+ALTER TABLE `phone`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT pour la table `promotion`
+--
+ALTER TABLE `promotion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- Contraintes pour les tables exportées
 --
@@ -219,7 +299,3 @@ ALTER TABLE `phone`
 --
 ALTER TABLE `promotion`
   ADD CONSTRAINT `promotion_ibfk_1` FOREIGN KEY (`phone`) REFERENCES `phone` (`id`);
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
