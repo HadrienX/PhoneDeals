@@ -38,6 +38,22 @@
 			';
 		}
 
+		public static function getGravatar($email, $size = 80, $defaultImg = 'wavatar', $maximumRating = 'g', $img = false, $additional = array()) {
+			$url = 'http://www.gravatar.com/avatar/';
+			$url .= md5(strtolower(trim($email)));
+			$url .= "?s=$size&d=$defaultImg&r=$maximumRating";
+			
+			if ($img) {
+				$url = '<img src="' . $url . '"';
+				foreach ($additional as $key => $val) {
+					$url .= ' ' . $key . '="' . $val . '"';
+				}
+				$url .= ' />';
+			}
+
+			return $url;
+		}
+
 		public static function url($url) {
 			$url = strip_tags($url);
 			$url = strtolower($url);
