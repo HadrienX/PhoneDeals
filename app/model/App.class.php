@@ -54,6 +54,23 @@
 			return $url;
 		}
 
+		public static function getHeader($code) {
+			switch ($code) {
+				case 404:
+					header("HTTP/1.0 404 Not Found");
+					require_once(APP . '/view/error.php');
+				break;
+
+				case 403:
+					header("HTTP/1.0 403 Forbidden");
+				break;
+			}
+		}
+
+		public static function redirect($url) {
+			header('Location: ' . $url);
+		}
+
 		public static function url($url) {
 			$url = strip_tags($url);
 			$url = strtolower($url);
