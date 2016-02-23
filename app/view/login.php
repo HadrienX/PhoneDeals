@@ -1,31 +1,33 @@
 <?php
-	if (isset($_POST['email']) && !empty($_POST['email']))  {
+	if (!App::isLogged()) {
 		try {
 			$email = $_POST['email'];
 			$password = $_POST['password'];
 
 			PDOConnexion::setParameters('phonedeals', 'root', 'root');
 			$db = PDOConnexion::getInstance();
-			$sql = "SELECT id, admin FROM member WHERE email = :email && password = :password";
+
+			$sql = "SELECT id, admin, password FROM member WHERE email = :email";
 			$sth = $db->prepare($sql);
 			$sth->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Member');
-			$sth->execute(array(
-				':email' => $email,
-				':password' => $password
-			));
+			$sth->execute(array(':email' => $email));
 
 			$member = $sth->fetch();
 
-			if ($member->id > 0) {
-				$_SESSION['id'] = $member->id;
-				$_SESSION['email'] = $email;
+			if (Bcrypt::checkPassword($password, $member->password)) {
+				if ($member->id > 0) {
+					$_SESSION['id'] = $member->id;
+					$_SESSION['email'] = $email;
 
-				if ($member->admin) {
-					$_SESSION['admin'] = true;
+					if ($member->admin) {
+						$_SESSION['admin'] = true;
+					}
 				}
+
+				App::redirect('index.php?page=home');
 			}
 
-			echo '<script>document.location.href="index.php?page=home"</script>';
+			App::error('Identifiants incorrects !');
 		}
 
 		catch(PDOException $e) {
@@ -35,6 +37,6 @@
 	}
 
 	else {
-		echo '<script>document.location.href="index.php?page=home"</script>';
+		App::redirect('index.php?page=home');
 	}
 ?>
