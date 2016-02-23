@@ -14,6 +14,7 @@
 	Autoloader::register(); // Pour ne plus avoir à inclure manuellement chaque fichier de classe
 
 	session_start();
+	ob_start();
 
 	if (empty($_GET['page'])) {
 		$_GET['page'] = 'home';
@@ -30,4 +31,6 @@
 	}
 
 	require_once(APP . '/view/footer.php');
+
+	ob_end_flush();
 ?>
