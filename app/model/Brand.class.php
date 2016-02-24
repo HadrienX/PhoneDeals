@@ -28,12 +28,23 @@
 			$db = PDOConnexion::getInstance();
 			$sql = 'SELECT * FROM brand WHERE id = :id';
 			$sth = $db->prepare($sql);
-			$sth->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Color');
+			$sth->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Brand');
 			$sth->execute(array(
 				':id' => $id
 			));
 			
 			return $sth->fetch();
+		}
+
+		public static function getBrandList() {
+			PDOConnexion::setParameters('phonedeals', 'root', 'root');
+			$db = PDOConnexion::getInstance();
+			$sql = 'SELECT * FROM brand';
+			$sth = $db->prepare($sql);
+			$sth->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Brand');
+			$sth->execute();
+			
+			return $sth->fetchAll();
 		}
 	}
 ?>
