@@ -14,17 +14,19 @@
 
 			$member = $sth->fetch();
 
-			if (Bcrypt::checkPassword($password, $member->password)) {
-				if ($member->id > 0) {
-					$_SESSION['id'] = $member->id;
-					$_SESSION['email'] = $email;
+			if ($member) {
+				if (Bcrypt::checkPassword($password, $member->password)) {
+					if ($member->id > 0) {
+						$_SESSION['id'] = $member->id;
+						$_SESSION['email'] = $email;
 
-					if ($member->admin) {
-						$_SESSION['admin'] = true;
+						if ($member->admin) {
+							$_SESSION['admin'] = true;
+						}
 					}
-				}
 
-				App::redirect('index.php?page=home');
+					App::redirect('index.php?page=home');
+				}
 			}
 
 			App::error('Identifiants incorrects !');
