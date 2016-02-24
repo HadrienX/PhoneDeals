@@ -37,25 +37,15 @@
 			return $sth->fetch();
 		}
 
-		public static function getPhoneThumbnail($id) {
+		public static function getColorList() {
 			PDOConnexion::setParameters('phonedeals', 'root', 'root');
 			$db = PDOConnexion::getInstance();
-			$sql = 'SELECT name, color FROM phone WHERE id = :id';
+			$sql = 'SELECT * FROM color';
 			$sth = $db->prepare($sql);
-			$sth->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Phone');
-			$sth->execute(array(
-				':id' => $id
-			));
+			$sth->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Color');
+			$sth->execute();
 			
-			$req = $sth->fetch();
-			$colors = explode(',', $req->color);
-			$imgUrl = 'uploads/phones/' . $id . '/' . App::url($req->name) . '-' . $colors[0] . '.jpg';
-
-			if (!file_exists($imgUrl)) {
-				return 'img/default-thumbnail.jpg';
-			}
-
-			return $imgUrl;
+			return $sth->fetchAll();
 		}
 	}
 ?>
