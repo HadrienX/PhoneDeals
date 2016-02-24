@@ -23,6 +23,7 @@
 	require_once(APP . '/view/header.php');
 
 	if (!file_exists(APP . '/view/' . $_GET['page'] . '.php')) {
+		App::getHeader(404);
 		require_once(APP . '/view/error.php');
 	}
 
