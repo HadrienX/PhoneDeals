@@ -2,12 +2,10 @@
 	if (isset($_POST['action'])) {
 		if ($_POST['action'] == 'add') {
 			$phone = Phone::getPhoneById($_POST['id']);
-
 			// Si la session existe, alors on initialise la valeur dans une variable
 			if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
 				$cart = $_SESSION['cart'];
 			}
-
 			// Sinon, on initialise simplement la variable vide
 			else {
 				$cart = array(
@@ -16,36 +14,29 @@
 					'price_total' => (int) 0,
 				);
 			}
-
 			// Lorsqu'on ajoute un téléphone, on le stocke dans un tableau
 			array_push($cart['phones'], array(
 				'id' => (int) $phone->id,
 				'name' => $phone->name,
 				'price' => (int) $phone->price
 			));
-
 			// On précise que les données entrés précédement correspondent à la variable $cart pour les ajouter dans la session
 			$_SESSION['cart'] = $cart;
-
 			$_SESSION['cart']['phone_total'] = $_SESSION['cart']['phone_total'] + 1;
 			$_SESSION['cart']['price_total'] = $_SESSION['cart']['price_total'] + $phone->price;
-
 			echo count($_SESSION['cart']['price_total']);
 		}
-
 		elseif ($_POST['action'] == 'remove') {
 			unset($_SESSION['cart']['phones'][$_POST['id']]);
 		}
-
 		else {
 			echo 'Erreur';
 		}
 	}
-
+	
 	else {
 		$empty = true;
 		$phonesTotal = 0;
-
 		if (isset($_SESSION['cart']['phones']) && !empty($_SESSION['cart']['phones'])) {
 			$empty = false;
 			$phonesTotal = $_SESSION['cart']['phone_total'];
@@ -84,7 +75,6 @@
 								';
 							}
 						}
-
 						else {
 							echo '
 								<tr>

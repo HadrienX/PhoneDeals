@@ -77,6 +77,7 @@
 			}
 
 			require_once(APP . '/view/footer.php');
+			die();
 		}
 
 		public static function redirect($url) {

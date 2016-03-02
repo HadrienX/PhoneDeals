@@ -82,7 +82,7 @@
 										if ($member->admin) {
 											echo '
 												<li class="divider" role="separator"></li>
-												<li><a href="index.php?page=admin">Administration</a></li>
+												<li><a href="index.php?page=admin/home">Administration</a></li>
 											';
 										}
 									?>

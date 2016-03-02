@@ -6,10 +6,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="description" content="">
 		<link rel="icon" href="img/favicon.png">
-		<title><?php echo App::$siteTitle; ?></title>
+		<title><?php echo App::$siteTitle; ?> - Admin</title>
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
-		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -66,34 +65,41 @@
 						<li<?php App::isCurrentPage('about'); ?>><a href="index.php?page=about">À propos</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="index.php?page=cart"><i class="fa fa-shopping-cart"></i> 0</a></li>
-						<?php if (App::isLogged()) : ?>
-							<?php $member = Member::getMemberById($_SESSION['id']); ?>
-							<li class="dropdown">
-								<a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#" id="drop1">
-									<img src="<?php echo App::getGravatar($member->email, 20); ?>" alt="Avatar de <?php echo $member->first_name; ?>" style="margin-right: 5px;" />
-									<?php echo $member->first_name; ?>
-									<span class="caret"></span>
-								</a>
-								<ul aria-labelledby="drop1" class="dropdown-menu">
-									<li><a href="index.php?page=profile">Profil</a></li>
-									<li><a href="index.php?page=orders">Mes commandes</a></li>
-									<?php
-										if ($member->admin) {
-											echo '
-												<li class="divider" role="separator"></li>
-												<li><a href="index.php?page=admin">Administration</a></li>
-											';
-										}
-									?>
-								</ul>
-							</li>
-	                        <li><a href="index.php?page=signout">Déconnexion</a></li>
-						<?php else: ?>
-	                        <li<?php App::isCurrentPage('signup'); ?>><a href="index.php?page=signup">Inscription</a></li>
-	                        <li<?php App::isCurrentPage('signin'); ?>><a href="#" data-toggle="modal" data-target="#signin-modal">Connexion</a></li>
-	                    <?php endif; ?>
+						<?php $member = Member::getMemberById($_SESSION['id']); ?>
+						<li class="dropdown">
+							<a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#" id="drop1">
+								<img src="<?php echo App::getGravatar($member->email, 20); ?>" alt="Avatar de <?php echo $member->first_name; ?>" style="margin-right: 5px;" />
+								<?php echo $member->first_name; ?>
+								<span class="caret"></span>
+							</a>
+							<ul aria-labelledby="drop1" class="dropdown-menu">
+								<li><a href="index.php?page=profile">Profil</a></li>
+								<li><a href="index.php?page=orders">Mes commandes</a></li>
+								<?php
+									if ($member->admin) {
+										echo '
+											<li class="divider" role="separator"></li>
+											<li><a href="index.php?page=admin/home">Administration</a></li>
+										';
+									}
+								?>
+							</ul>
+						</li>
+                        <li><a href="index.php?page=signout">Déconnexion</a></li>
                     </ul>
 				</div>
 			</div>
 		</nav>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<ul class="nav nav-tabs">
+						<li role="presentation"<?php App::isCurrentPage('admin/home'); ?>><a href="index.php?page=admin/home">Home</a></li>
+						<li role="presentation"<?php App::isCurrentPage('admin/phones-list'); ?>><a href="index.php?page=admin/phones-list">Téléphones</a></li>
+						<li role="presentation"<?php App::isCurrentPage('admin/members-list'); ?>><a href="index.php?page=admin/members-list">Membres</a></li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="row">

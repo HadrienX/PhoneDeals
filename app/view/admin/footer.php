@@ -1,3 +1,6 @@
+			</div>
+		</div>
+
 		<footer id="footer" style="border-top: 1px solid #ededed; margin-top: 30px; padding: 15px 0;">
 			<div class="container">
 				<div class="row">
