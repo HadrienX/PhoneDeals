@@ -16,6 +16,14 @@
 			return false;
 		}
 
+		public static function isAdmin() {
+			if (self::isLogged() && isset($_SESSION['admin']) && $_SESSION['admin']) {
+				return true;
+			}
+
+			return false;
+		}
+
 		public static function error($log) {
 			echo '
 				<div class="erreur">
@@ -55,6 +63,8 @@
 		}
 
 		public static function getHeader($code) {
+			require_once(APP . '/view/header.php');
+
 			switch ($code) {
 				case 404:
 					header("HTTP/1.0 404 Not Found");
@@ -65,6 +75,8 @@
 					header("HTTP/1.0 403 Forbidden");
 				break;
 			}
+
+			require_once(APP . '/view/footer.php');
 		}
 
 		public static function redirect($url) {

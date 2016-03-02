@@ -20,18 +20,29 @@
 		$_GET['page'] = 'home';
 	}
 
-	require_once(APP . '/view/header.php');
+	if ($_GET['page'] == 'admin') {
+		if (App::isAdmin()) {
+			require_once(APP . '/view/admin/header.php');
+			require_once(APP . '/view/admin/home.php');
+			require_once(APP . '/view/admin/footer.php');
+		}
 
-	if (!file_exists(APP . '/view/' . $_GET['page'] . '.php')) {
-		App::getHeader(404);
-		require_once(APP . '/view/error.php');
+		else {
+			App::getHeader(404);
+		}
 	}
 
 	else {
-		require_once(APP . '/view/' . $_GET['page'] . '.php');
-	}
+		if (!file_exists(APP . '/view/' . $_GET['page'] . '.php')) {
+			App::getHeader(404);
+		}
 
-	require_once(APP . '/view/footer.php');
+		else {
+			require_once(APP . '/view/header.php');
+			require_once(APP . '/view/' . $_GET['page'] . '.php');
+			require_once(APP . '/view/footer.php');
+		}
+	}
 
 	ob_end_flush();
 ?>

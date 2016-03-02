@@ -1,3 +1,13 @@
+<style type="text/css">
+	.badge.old-price::before {
+		transform: rotate(-45deg) translate(-6px, 4px);
+		border: 1px solid #777;
+		display: block;
+		content: '';
+		width: 25px;
+	}
+</style>
+
 <div class="container">
 	<div class="row">
 		<div class="col-md-8">
@@ -15,15 +25,13 @@
 									echo '<img src="' . Phone::getPhoneThumbnail($phone->id) . '" alt="' . $phone->name . '" style="width: 100px;">';
 									echo '<h4>' . $phone->name . '</h4>';
 								echo '</a>';
-								echo '<span class="badge">';
-									if (isset($phone->promotionPrice)) {
-										echo $phone->promotionPrice . ' &euro; au lieu de ' . $phone->price;
-									}
-
-									else {
-										echo $phone->price;
-									}
-								echo '&euro;</span>';
+								
+								if (isset($phone->promotionPrice)) {
+									echo '<span class="badge old-price" style="background-color: transparent; color: #777;">' . $phone->price . ' &euro;</span> <span class="badge" style="background: #e74c3c;">' . $phone->promotionPrice . ' &euro;</span>';
+								}
+								else {
+									echo '<span class="badge">' . $phone->price . ' &euro;</span>';
+								}
 							echo '</div>';
 						echo '</div>';
 					}

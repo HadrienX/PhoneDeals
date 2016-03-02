@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost:3306
--- Généré le :  Mar 23 Février 2016 à 22:40
+-- Généré le :  Mer 02 Mars 2016 à 10:24
 -- Version du serveur :  5.5.42
 -- Version de PHP :  7.0.0
 
@@ -110,7 +110,7 @@ CREATE TABLE `member` (
   `zip_code` int(11) NOT NULL,
   `admin` tinyint(1) NOT NULL,
   `register_date` date NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `member`
@@ -262,7 +262,7 @@ ALTER TABLE `color`
 -- AUTO_INCREMENT pour la table `member`
 --
 ALTER TABLE `member`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `order`
 --

@@ -1,13 +1,17 @@
 <div class="container">
 	<div class="row">
 		<?php
-			if (!isset($_GET['id'])) {
-				echo 'Vous n\'avez pas entré d\'ID';
+			if (!isset($_GET['id']) || empty($_GET['id'])) {
+				App::redirect('index.php?page=list');
 			}
 			
 			else {
 				$id = $_GET['id'];
 				$phone = Phone::getPhoneById($id);
+
+				if (Promotion::getPromotionByPhoneId($phone->id)) {
+					$phone->promotionPrice = $phone->price - ((Promotion::getPromotionByPhoneId($phone->id)->percent) * 0.01) * $phone->price;
+				}
 		?>
 			<div class="col-sm-12" style="margin-bottom: 30px;">
 				<h1 style="margin-bottom: 0;"><?php echo $phone->name; ?></h1>
@@ -30,8 +34,18 @@
 				</div>
 			</div>
 			<div class="col-md-4 col-sm-6 col-xs-12">
-				<span style="font-weight:bolder; font-size:3em;"><?php echo $phone->price; ?> &euro;</span><br />
-				<div id="amount">
+				<?php
+					if (isset($phone->promotionPrice)) {
+						echo '<span style="font-weight:bolder; font-size:3em;">' . $phone->promotionPrice . ' &euro;</span>';
+						echo ' Au lieu de ' . $phone->price . ' &euro; <span class="badge" style="background-color: #e85142;">Promotion</span><br />';
+						echo 'Économisez ' . Promotion::getPromotionByPhoneId($phone->id)->percent . ' %';
+					}
+
+					else {
+						echo '<span style="font-weight:bolder; font-size:3em;">' . $phone->price . ' &euro;</span><br />';
+					}
+				?>
+				<div id="amount" style="margin-top: 30px;">
 					Quantité :
 					<select>
 						<?php
