@@ -21,19 +21,28 @@
 		'capacity' => null
 	);
 
+	$toaddurl =array (
+		'brand' => "",
+		'color' => "",
+		'capacity' => ""
+	);
+
 	if (isset($_GET['brand'])) {
 		$sort['brand'] = htmlentities($_GET['brand']);
-		$url .= '&brand=' . $sort['brand'];
+		//$url .= '&brand=' . $sort['brand'];
+		$toaddurl['brand']='&brand=' . $sort['brand'];
 	}
 
 	if (isset($_GET['color'])) {
 		$sort['color'] = htmlentities($_GET['color']);
-		$url .= '&color=' . $sort['color'];
+		//$url .= '&color=' . $sort['color'];
+		$toaddurl['color']='&color=' . $sort['color'];
 	}
 
 	if (isset($_GET['capacity'])) {
 		$sort['capacity'] = htmlentities($_GET['capacity']);
-		$url .= '&capacity=' . $sort['capacity'];
+		//$url .= '&capacity=' . $sort['capacity'];
+		$toaddurl['capacity']=	'&capacity=' . $sort['capacity'];
 	}
 ?>
 
@@ -45,43 +54,55 @@
 	</div>
 
 	<div class="row">
+		<!-- STAR SORT -->
 		<div class="col-md-3">
+			<!-- START BRAND -->
 			<div style="display: block; width: 100%; overflow: hidden;">
 				<h4>Marques</h4>
 				<div class="list-group">
 					<?php
+						$newurl=$url.$toaddurl['capacity'].$toaddurl['color'];
 						foreach (Brand::getBrandList() as $brand) {
+
 							$active = ($sort['brand'] == strtolower($brand->brand_name)) ? ' active' : '';
-							echo '<a href="' . $url . '&brand=' . strtolower($brand->brand_name) . '" class="list-group-item' . $active . '">' . $brand->brand_name . '</a>';
+
+							echo '<a href="' . $newurl . '&brand=' . strtolower($brand->brand_name) . '" class="list-group-item' . $active . '">' . $brand->brand_name . '</a>';
 						}
 					?>
 				</div>
 			</div>
-
+			<!-- END BRAND -->
+			<!-- START COLOR -->
 			<div style="display: block; width: 100%; overflow: hidden;">
 				<h4>Couleur</h4>
 				<ul style="list-style: none; margin: 0; padding: 0; width: 195px;">
 					<?php
+						$newurl=$url.$toaddurl['brand'].$toaddurl['capacity'];
 						foreach (Color::getColorList() as $color) {
 							$unactive = ($sort['color'] != $color->id) ? ' class="unactive"' : '';
-							echo '<li style="float: left; margin: 0 0 10px 10px;"><a href="' . $url . '&color=' . strtolower($color->id) . '" ' . $unactive . 'style="background: ' . $color->hex . '; border: 1px solid #ededed; display: inline-block; width: 30px; height: 30px; border-radius: 30px;" title="' . $color->name . '"></a></li>';
+
+							echo '<li style="float: left; margin: 0 0 10px 10px;"><a href="' . $newurl . '&color=' . strtolower($color->id) . '" ' . $unactive . 'style="background: ' . $color->hex . '; border: 1px solid #ededed; display: inline-block; width: 30px; height: 30px; border-radius: 30px;" title="' . $color->name . '"></a></li>';
 						}
 					?>
 				</ul>
 			</div>
-
+			<!-- END COLOR -->
+			<!-- START CAPACITY -->
 			<div style="display: block; width: 100%; overflow: hidden;">
 				<h4>Capacité</h4>
 				<div class="list-group">
 					<?php
+						$newurl=$url.$toaddurl['brand'].$toaddurl['color'];
 						foreach (Capacity::getCapacityList() as $capacity) {
 							$active = ($sort['capacity'] == $capacity->storage) ? ' active' : '';
-							echo '<a href="' . $url . '&capacity=' . $capacity->storage . '" class="list-group-item' . $active . '">' . $capacity->storage . ' Go</a>';
+							echo '<a href="' . $newurl . '&capacity=' . $capacity->storage . '" class="list-group-item' . $active . '">' . $capacity->storage . ' Go</a>';
 						}
 					?>
 				</div>
 			</div>
+			<!-- END CAPACITY -->
 		</div>
+		<!-- END SORT -->
 		<div class="col-md-9">
 			<div class="row">
 				<?php
