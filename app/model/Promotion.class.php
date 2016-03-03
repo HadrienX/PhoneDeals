@@ -56,5 +56,12 @@
 			
 			return $sth->fetchAll();
 		}
+
+		public static function getNewPrice($promotionId) {
+			$promotion = self::getPromotionByPhoneId($promotionId);
+			$phone = Phone::getPhoneById($promotion->phone);
+
+			return $phone->price - (($promotion->percent) * 0.01) * $phone->price;
+		}
 	}
 ?>

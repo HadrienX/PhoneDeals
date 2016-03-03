@@ -20,10 +20,6 @@
 			$this->$n = $v;
 		}
 
-		public function __toString(){
-			return "<p>{$this->id} - {$this->name} - {$this->hex}</p>";
-		}
-
 		public static function getColorById($id) {
 			PDOConnexion::setParameters('phonedeals', 'root', 'root');
 			$db = PDOConnexion::getInstance();
@@ -46,6 +42,25 @@
 			$sth->execute();
 			
 			return $sth->fetchAll();
+		}
+
+		public static function getColorsNames($colorsList, $badge = false) {
+			$colors = explode(',', $colorsList);
+			$colorsNames = '';
+
+			if ($badge) {
+				foreach ($colors as $color) {
+					$colorsNames .= '<span class="badge" style="background-color: ' . self::getColorById($color)->hex . '">' . self::getColorById($color)->name . '</span><br />';
+				}
+
+				return $colorsNames;
+			}
+
+			foreach ($colors as $color) {
+				$colorsNames .= self::getColorById($color)->name . ', ';
+			}
+
+			return trim(trim($colorsNames), ',');
 		}
 	}
 ?>

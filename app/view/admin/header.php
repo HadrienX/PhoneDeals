@@ -95,9 +95,15 @@
 			<div class="row">
 				<div class="col-md-12">
 					<ul class="nav nav-tabs">
-						<li role="presentation"<?php App::isCurrentPage('admin/home'); ?>><a href="index.php?page=admin/home">Home</a></li>
-						<li role="presentation"<?php App::isCurrentPage('admin/phones-list'); ?>><a href="index.php?page=admin/phones-list">Téléphones</a></li>
-						<li role="presentation"<?php App::isCurrentPage('admin/members-list'); ?>><a href="index.php?page=admin/members-list">Membres</a></li>
+						<li role="presentation"<?php App::isCurrentPage('admin/home'); ?>><a href="index.php?page=admin/home"><i class="fa fa-tachometer"></i> Dashboard</a></li>
+						<li role="presentation"<?php App::isCurrentPage('admin/phones-list'); ?>><a href="index.php?page=admin/phones-list"><i class="fa fa-mobile"></i> Téléphones</a></li>
+						<li role="presentation"<?php App::isCurrentPage('admin/members-list'); ?>><a href="index.php?page=admin/members-list"><i class="fa fa-user"></i> Membres</a></li>
+						<li role="presentation"<?php App::isCurrentPage('admin/promotions-list'); ?>><a href="index.php?page=admin/promotions-list"><i class="fa fa-percent"></i> Promotions</a></li>
+						<li role="presentation"<?php App::isCurrentPage('admin/orders-list'); ?>><a href="index.php?page=admin/orders-list"><i class="fa fa-th-list"></i> Commandes</a></li>
+						<li role="presentation"<?php App::isCurrentPage('admin/brands-list'); ?>><a href="index.php?page=admin/brands-list"><i class="fa fa-tag"></i> Marques</a></li>
+						<li role="presentation"<?php App::isCurrentPage('admin/capacities-list'); ?>><a href="index.php?page=admin/capacities-list"><i class="fa fa-database"></i> Capacités</a></li>
+						<li role="presentation"<?php App::isCurrentPage('admin/colors-list'); ?>><a href="index.php?page=admin/colors-list"><i class="fa fa-picture-o"></i> Couleurs</a></li>
+						<li role="presentation"<?php App::isCurrentPage('admin/settings'); ?>><a href="index.php?page=admin/settings"><i class="fa fa-cog"></i> Réglages</a></li>
 					</ul>
 				</div>
 			</div>

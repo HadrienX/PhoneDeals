@@ -1,7 +1,7 @@
 <?php	
 	class Brand {
 		private $id;
-		private $brand_name;
+		private $name;
 		
 		public function __construct(array $args = array()) {
 			if (!empty($args)) {
@@ -20,7 +20,7 @@
 		}
 
 		public function __toString(){
-			return "<p>{$this->id} - {$this->brand_name}</p>";
+			return $this->name;
 		}
 
 		public static function getBrandById($id) {

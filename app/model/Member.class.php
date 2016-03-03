@@ -45,7 +45,7 @@
 			return $sth->fetch();
 		}
 
-		public static function getPhonesList() {
+		public static function getMembersList() {
 			PDOConnexion::setParameters('phonedeals', 'root', 'root');
 			$db = PDOConnexion::getInstance();
 			$sql = 'SELECT * FROM member';
