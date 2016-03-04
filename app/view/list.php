@@ -18,19 +18,13 @@
 		'color' => null,
 		'capacity' => null
 	);
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/master
 	$toaddurl =array (
 		'brand' => "",
 		'color' => "",
 		'capacity' => ""
 	);
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/master
 	if (isset($_GET['brand'])) {
 		$sort['brand'] = htmlentities($_GET['brand']);
 		//$url .= '&brand=' . $sort['brand'];
@@ -65,15 +59,13 @@
 					<?php
 						$newurl=$url.$toaddurl['capacity'].$toaddurl['color'];
 						foreach (Brand::getBrandList() as $brand) {
-<<<<<<< HEAD
-							$active = ($sort['brand'] == strtolower($brand->name)) ? ' active' : '';
+							$active = ($sort['brand'] == strtolower($brand->name)) ? ' unactive' : '';
 							echo '<a href="' . $newurl . '&brand=' . strtolower($brand->name) . '" class="list-group-item' . $active . '">' . $brand->name . '</a>';
-=======
 
 							$active = ($sort['brand'] == strtolower($brand->brand_name)) ? ' active' : '';
 
 							echo '<a href="' . $newurl . '&brand=' . strtolower($brand->brand_name) . '" class="list-group-item' . $active . '">' . $brand->brand_name . '</a>';
->>>>>>> origin/master
+
 						}
 					?>
 				</div>
@@ -87,10 +79,7 @@
 						$newurl=$url.$toaddurl['brand'].$toaddurl['capacity'];
 						foreach (Color::getColorList() as $color) {
 							$unactive = ($sort['color'] != $color->id) ? ' class="unactive"' : '';
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/master
 							echo '<li style="float: left; margin: 0 0 10px 10px;"><a href="' . $newurl . '&color=' . strtolower($color->id) . '" ' . $unactive . 'style="background: ' . $color->hex . '; border: 1px solid #ededed; display: inline-block; width: 30px; height: 30px; border-radius: 30px;" title="' . $color->name . '"></a></li>';
 						}
 					?>
