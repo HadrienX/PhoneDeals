@@ -49,8 +49,11 @@
 			$colorsNames = '';
 
 			if ($badge) {
+				$color = '';
+
 				foreach ($colors as $color) {
-					$colorsNames .= '<span class="badge" style="background-color: ' . self::getColorById($color)->hex . '">' . self::getColorById($color)->name . '</span><br />';
+					$colorWhite = (self::getColorById($color)->name == 'Blanc') ? ' color: #000; border: 1px solid #000' : '';
+					$colorsNames .= '<span class="badge" style="background-color: ' . self::getColorById($color)->hex . ';' . $colorWhite . '">' . self::getColorById($color)->name . '</span><br />';
 				}
 
 				return $colorsNames;
