@@ -25,7 +25,7 @@
 		}
 
 		public function __toString(){
-			return "<p>{$this->id} - {$this->name} - {$this->brand} - {$this->capacity} - {$this->price} - {$this->color} - {$this->desc}</p>";
+			return $this->name;
 		}
 
 		public static function getPhoneById($id) {
@@ -45,6 +45,17 @@
 			PDOConnexion::setParameters('phonedeals', 'root', 'root');
 			$db = PDOConnexion::getInstance();
 			$sql = 'SELECT * FROM phone';
+			$sth = $db->prepare($sql);
+			$sth->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Phone');
+			$sth->execute();
+			
+			return $sth->fetchAll();
+		}
+
+		public static function getLatestPhones() {
+			PDOConnexion::setParameters('phonedeals', 'root', 'root');
+			$db = PDOConnexion::getInstance();
+			$sql = 'SELECT * FROM phone ORDER BY id DESC LIMIT 9';
 			$sth = $db->prepare($sql);
 			$sth->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Phone');
 			$sth->execute();
