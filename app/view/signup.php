@@ -207,7 +207,7 @@
 						<div class="checkbox">
 							<label>
 								<input type="checkbox" name="accept_terms" required="required" id="signup-terms">
-								J'ai lu et j'accepte les <a href="#">conditions d'utilisations</a> et la <a href="#">politique de confidentialité</a>
+								J'ai lu et j'accepte les <a href="#">conditions d'utilisations</a> et la <a href="index.php?page=privacy">politique de confidentialité</a>
 							</label>
 						</div>
 					</div>
