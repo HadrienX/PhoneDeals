@@ -59,4 +59,14 @@
 			?>
 		</div>
 	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<h2>Nouveautés</h2>
+			<?php
+				if (Phone::getLatestPhones()) {
+				}
+			?>
+		</div>
+	</div>
 </div>
