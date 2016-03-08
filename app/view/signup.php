@@ -12,7 +12,7 @@
        		isset($_POST['way_type']) && $_POST['way_type']!="" &&
        		isset($_POST['way_name'])&& $_POST['way_name']!="" && preg_match("#[a-zA-Z]{2,30}#", $_POST['way_name']) &&
        		isset($_POST['city'])&& $_POST['city']!="" && preg_match("#[a-zA-Z]{2,30}#", $_POST['city']) &&
-       		isset($_POST['zip_code']) && $_POST['zip_code']!="" && preg_match("#^[0-9]{5}$#", $_POST['zip_code'])
+       		isset($_POST['zip_code']) && $_POST['zip_code']!="" && preg_match("#^[0-9]{5}$#", $_POST['zip_code']) &&
     	   	isset($_POST['accept_terms'])){
     	    
 			$first_name = $_POST['first_name'];
