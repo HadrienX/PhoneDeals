@@ -59,13 +59,8 @@
 					<?php
 						$newurl=$url.$toaddurl['capacity'].$toaddurl['color'];
 						foreach (Brand::getBrandList() as $brand) {
-							$active = ($sort['brand'] == strtolower($brand->name)) ? ' unactive' : '';
+							$active = ($sort['brand'] == strtolower($brand->name)) ? ' active' : '';
 							echo '<a href="' . $newurl . '&brand=' . strtolower($brand->name) . '" class="list-group-item' . $active . '">' . $brand->name . '</a>';
-
-							$active = ($sort['brand'] == strtolower($brand->brand_name)) ? ' active' : '';
-
-							echo '<a href="' . $newurl . '&brand=' . strtolower($brand->brand_name) . '" class="list-group-item' . $active . '">' . $brand->brand_name . '</a>';
-
 						}
 					?>
 				</div>
