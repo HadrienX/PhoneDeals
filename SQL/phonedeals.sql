@@ -1,17 +1,17 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.10
+-- version 4.2.10
 -- http://www.phpmyadmin.net
 --
--- Client :  localhost:3306
--- Généré le :  Lun 07 Mars 2016 à 17:09
--- Version du serveur :  5.5.42
--- Version de PHP :  7.0.0
+-- Client :  localhost:8889
+-- Généré le :  Mar 08 Mars 2016 à 11:34
+-- Version du serveur :  5.5.38
+-- Version de PHP :  5.6.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 --
--- Base de données :  `phonedeals`
+-- Base de données :  `PhoneDeals`
 --
 
 -- --------------------------------------------------------
@@ -21,7 +21,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `brand` (
-  `id` int(11) NOT NULL,
+`id` int(11) NOT NULL,
   `name` varchar(128) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
@@ -45,7 +45,7 @@ INSERT INTO `brand` (`id`, `name`) VALUES
 --
 
 CREATE TABLE `capacity` (
-  `id` int(11) NOT NULL,
+`id` int(11) NOT NULL,
   `storage` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
@@ -66,7 +66,7 @@ INSERT INTO `capacity` (`id`, `storage`) VALUES
 --
 
 CREATE TABLE `color` (
-  `id` int(11) NOT NULL,
+`id` int(11) NOT NULL,
   `name` varchar(128) NOT NULL,
   `hex` varchar(7) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
@@ -98,7 +98,7 @@ INSERT INTO `color` (`id`, `name`, `hex`) VALUES
 --
 
 CREATE TABLE `member` (
-  `id` int(11) NOT NULL,
+`id` int(11) NOT NULL,
   `first_name` varchar(128) CHARACTER SET utf8 NOT NULL,
   `last_name` varchar(128) CHARACTER SET utf8 NOT NULL,
   `email` varchar(128) CHARACTER SET utf8 NOT NULL,
@@ -128,7 +128,7 @@ INSERT INTO `member` (`id`, `first_name`, `last_name`, `email`, `password`, `way
 --
 
 CREATE TABLE `order` (
-  `id` int(11) NOT NULL,
+`id` int(11) NOT NULL,
   `member` int(11) NOT NULL,
   `date` date NOT NULL,
   `paid_price` double NOT NULL,
@@ -144,14 +144,14 @@ CREATE TABLE `order` (
 --
 
 CREATE TABLE `phone` (
-  `id` int(11) NOT NULL,
+`id` int(11) NOT NULL,
   `name` varchar(64) CHARACTER SET utf8 NOT NULL,
   `brand` int(11) NOT NULL,
   `capacity` varchar(16) CHARACTER SET utf8 NOT NULL,
   `price` double NOT NULL,
   `color` varchar(16) CHARACTER SET utf8 NOT NULL,
   `description` text CHARACTER SET utf8 NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `phone`
@@ -165,7 +165,12 @@ INSERT INTO `phone` (`id`, `name`, `brand`, `capacity`, `price`, `color`, `descr
 (5, 'Xperia C4', 4, '16,32,64,128', 348, '1,2,3', 'Le Xperia C4, c’est un appareil photo principal 13 mégapixels ultraperformant   doublé d’un appareil photo avant 5 mégapixels avec flash LED et objectif grand angle. Vous êtes paré pour prendre des photos et des vidéos PROselfie.'),
 (6, 'Xperia E4g', 4, '16,32', 129, '1,2', 'Profitez d''un smartphone à prix accessible qui associe la 4G, un large écran lumineux et des composants puissants pour une expérience utilisateur optimale. '),
 (7, 'Xperia M', 4, '16,32', 215, '1,2,14', 'Le design fin et épuré de l''Xperia™ M, inspiré de l''Xperia™ Z saura vous convaincre. Il assure une fiabilité exemplaire intégrant Android 4.1 et un appareil photo de 5 mégapixels qui vous permettra de capturer vos meilleurs instants.'),
-(8, 'Xperia E3', 4, '16,32', 169, '1,2,8,9', 'Le smartphone Sony Xperia E3 est un milieu de gamme 4G à prix modéré. Équipé d''un écran de 4,5 pouces, il embarque un processeur Snapdragon 400 et un capteur photo 5 mégapixels.');
+(8, 'Xperia E3', 4, '16,32', 169, '1,2,8,9', 'Le smartphone Sony Xperia E3 est un milieu de gamme 4G à prix modéré. Équipé d''un écran de 4,5 pouces, il embarque un processeur Snapdragon 400 et un capteur photo 5 mégapixels.'),
+(9, 'Xperia C5', 4, '16,32,64,128', 399.99, '1,2,3', 'Avec ses deux appareils photo\r\n13 mégapixels et son écran 6” ultra lumineux, le Xperia C5 Ultra Dual vous permet de réaliser de magnifiques selfies en toutes circonstances.'),
+(10, 'Xperia E', 4, '16,32', 119.9, '1,2,7', 'Le smartphone Android pratique avant\r\ntout !'),
+(11, 'Xperia T3', 4, '16,32', 229, '1,2,14', 'Découvrez le Sony XperiaTM T3, un\r\nsmartphone résistant à toute épreuve mêlant légèreté et finesse. Il dispose d''un bel écran HD de 5,3 pouces, un design fin et élégant, une bonne autonomie et un appareil photo de 8 Mégapixels pour profiter du meilleur du multimédia.'),
+(12, 'Xperia Z', 4, '16,32', 699.99, '1,2,14', 'Une expérience unique en 4G !\r\nVéritable bijou technologique, le Sony XperiaTM Z associe à la fois performance et design. Doté d’un processeur quadruple cœur cadencé à 1,5 GHz et d’une connectivité 4G, vous êtes multitâches et surfez très rapidement, sans épuiser la batterie ! Vous apprécierez également les matières nobles (aluminium et verre trempé) utilisées dans la conception du téléphone.'),
+(13, 'Xperia M4 Aqua', 4, '16,32', 314.36, '1,2,7', 'Un smartphone 4G étanche avec\r\nun écran 5 pouces, aussi beau qu’agréable à tenir en main. Toute l’expertise de Sony dans des appareils photos 13 Mégapixels et 5 Mégapixels. Une batterie puissante et des modes d’économie d’énergie efficaces.');
 
 -- --------------------------------------------------------
 
@@ -174,7 +179,7 @@ INSERT INTO `phone` (`id`, `name`, `brand`, `capacity`, `price`, `color`, `descr
 --
 
 CREATE TABLE `promotion` (
-  `id` int(11) NOT NULL,
+`id` int(11) NOT NULL,
   `phone` int(11) NOT NULL,
   `percent` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
@@ -194,50 +199,43 @@ INSERT INTO `promotion` (`id`, `phone`, `percent`) VALUES
 -- Index pour la table `brand`
 --
 ALTER TABLE `brand`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `capacity`
 --
 ALTER TABLE `capacity`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `color`
 --
 ALTER TABLE `color`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `member`
 --
 ALTER TABLE `member`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `order`
 --
 ALTER TABLE `order`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `member` (`member`,`phone`),
-  ADD KEY `member_2` (`member`),
-  ADD KEY `phone` (`phone`);
+ ADD PRIMARY KEY (`id`), ADD KEY `member` (`member`,`phone`), ADD KEY `member_2` (`member`), ADD KEY `phone` (`phone`);
 
 --
 -- Index pour la table `phone`
 --
 ALTER TABLE `phone`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `brand` (`brand`,`capacity`,`color`),
-  ADD KEY `brand_2` (`brand`),
-  ADD KEY `capacity` (`capacity`,`color`);
+ ADD PRIMARY KEY (`id`), ADD KEY `brand` (`brand`,`capacity`,`color`), ADD KEY `brand_2` (`brand`), ADD KEY `capacity` (`capacity`,`color`);
 
 --
 -- Index pour la table `promotion`
 --
 ALTER TABLE `promotion`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `phone` (`phone`);
+ ADD PRIMARY KEY (`id`), ADD KEY `phone` (`phone`);
 
 --
 -- AUTO_INCREMENT pour les tables exportées
@@ -247,37 +245,37 @@ ALTER TABLE `promotion`
 -- AUTO_INCREMENT pour la table `brand`
 --
 ALTER TABLE `brand`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT pour la table `capacity`
 --
 ALTER TABLE `capacity`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT pour la table `color`
 --
 ALTER TABLE `color`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT pour la table `member`
 --
 ALTER TABLE `member`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `phone`
 --
 ALTER TABLE `phone`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT pour la table `promotion`
 --
 ALTER TABLE `promotion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- Contraintes pour les tables exportées
 --
@@ -286,17 +284,17 @@ ALTER TABLE `promotion`
 -- Contraintes pour la table `order`
 --
 ALTER TABLE `order`
-  ADD CONSTRAINT `order_ibfk_1` FOREIGN KEY (`member`) REFERENCES `member` (`id`),
-  ADD CONSTRAINT `order_ibfk_2` FOREIGN KEY (`phone`) REFERENCES `phone` (`id`);
+ADD CONSTRAINT `order_ibfk_1` FOREIGN KEY (`member`) REFERENCES `member` (`id`),
+ADD CONSTRAINT `order_ibfk_2` FOREIGN KEY (`phone`) REFERENCES `phone` (`id`);
 
 --
 -- Contraintes pour la table `phone`
 --
 ALTER TABLE `phone`
-  ADD CONSTRAINT `phone_ibfk_1` FOREIGN KEY (`brand`) REFERENCES `brand` (`id`);
+ADD CONSTRAINT `phone_ibfk_1` FOREIGN KEY (`brand`) REFERENCES `brand` (`id`);
 
 --
 -- Contraintes pour la table `promotion`
 --
 ALTER TABLE `promotion`
-  ADD CONSTRAINT `promotion_ibfk_1` FOREIGN KEY (`phone`) REFERENCES `phone` (`id`);
+ADD CONSTRAINT `promotion_ibfk_1` FOREIGN KEY (`phone`) REFERENCES `phone` (`id`);
