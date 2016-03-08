@@ -2,8 +2,8 @@
 	
 	if(isset($_POST['signup'])){
 
-		if(isset($_POST['first_name']) && $_POST['first_name']!="" && preg_match("#^[a-zA-Z._-]{2,32}$#", $_POST['first_name']) &&
-    		isset($_POST['last_name']) && $_POST['last_name']!="" && preg_match("#^[a-zA-Z._-]{2,32}$#", $_POST['last_name']) &&
+		if(isset($_POST['first_name']) && $_POST['first_name']!="" && preg_match("#^[a-zA-Z._-]{2,32}#", $_POST['first_name']) &&
+    		isset($_POST['last_name']) && $_POST['last_name']!="" && preg_match("#^[a-zA-Z._-]{2,32}#", $_POST['last_name']) &&
     		isset($_POST['email']) && $_POST['email']!="" && preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $_POST['email']) &&
     		isset($_POST['email-confirm']) && $_POST['email-confirm']==$_POST['email'] &&
     	   	isset($_POST['password']) && $_POST['password']!="" && preg_match("#^\w{8,}$#", $_POST['password']) &&
@@ -71,10 +71,10 @@
 			(!isset($_POST['zip_code']) || $_POST['zip_code']=="")){
 				App::error('Vous devez remplir tous les champs obligatoires');
 			}
-			if(!preg_match("#^[a-zA-Z._-]{2,32}$#", $_POST['first_name'])){
+			if(!preg_match("#^[a-zA-Z._-]{2,32}#", $_POST['first_name'])){
 				App::error("Veuillez entrer un prénom approprié");
 			}
-			if(!preg_match("#^[a-zA-Z._-]{2,32}$#", $_POST['last_name'])){
+			if(!preg_match("#^[a-zA-Z._-]{2,32}#", $_POST['last_name'])){
 				App::error("Veuillez entrer un nom approprié");
 			}
 			if(!preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $_POST['email'])){
