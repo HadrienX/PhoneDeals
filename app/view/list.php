@@ -50,9 +50,7 @@
 	</div>
 
 	<div class="row">
-		<!-- STAR SORT -->
 		<div class="col-md-3">
-			<!-- START BRAND -->
 			<div style="display: block; width: 100%; overflow: hidden;">
 				<h4>Marques</h4>
 				<div class="list-group">
@@ -65,8 +63,6 @@
 					?>
 				</div>
 			</div>
-			<!-- END BRAND -->
-			<!-- START COLOR -->
 			<div style="display: block; width: 100%; overflow: hidden;">
 				<h4>Couleur</h4>
 				<ul style="list-style: none; margin: 0; padding: 0; width: 195px;">
@@ -80,8 +76,6 @@
 					?>
 				</ul>
 			</div>
-			<!-- END COLOR -->
-			<!-- START CAPACITY -->
 			<div style="display: block; width: 100%; overflow: hidden;">
 				<h4>Capacité</h4>
 				<div class="list-group">
@@ -94,9 +88,7 @@
 					?>
 				</div>
 			</div>
-			<!-- END CAPACITY -->
 		</div>
-		<!-- END SORT -->
 		<div class="col-md-9">
 			<div class="row">
 				<?php
