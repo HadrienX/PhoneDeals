@@ -142,7 +142,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<label for="signup-email-confirm">Confirmez votre adresse email</label>
-						<input type="text" name="email" class="form-control" id="signup-email-confirm" placeholder="Confirmez votre adresse email">
+						<input type="text" name="email-confirm" class="form-control" id="signup-email-confirm" placeholder="Confirmez votre adresse email">
 					</div>
 				</div>
 
@@ -156,7 +156,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<label for="signup-email-confirm">Confirmez votre mot de passe</label>
-						<input type="password" name="password" class="form-control" id="signup-password-confirm" placeholder="Confirmez votre mot de passe">
+						<input type="password" name="password-confirm" class="form-control" id="signup-password-confirm" placeholder="Confirmez votre mot de passe">
 					</div>
 				</div>
 
