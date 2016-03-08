@@ -1,3 +1,113 @@
+<?php
+	
+	if(isset($_POST['signup'])){
+
+		if(isset($_POST['first_name']) && $_POST['first_name']!="" && preg_match("#^[a-zA-Z]{2,32}$#", $_POST['first_name']) &&
+    		isset($_POST['last_name']) && $_POST['last_name']!="" && preg_match("#^[a-zA-Z]{2,32}$#", $_POST['last_name']) &&
+    		isset($_POST['email']) && $_POST['email']!="" && preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $_POST['email']) &&
+    		isset($_POST['email-confirm']) && $_POST['email-confirm']==$_POST['email'] &&
+    	   	isset($_POST['password']) && $_POST['password']!="" && preg_match("#^\w{8,}$#", $_POST['password']) &&
+    	   	isset($_POST['password-confirm']) && $_POST['password-confirm']==$_POST['password'] &&
+    	   	isset($_POST['way_num'])&& $_POST['way_num']!="" && preg_match("#^[0-9]{1,}$#", $_POST['way_num']) &&
+       		isset($_POST['way_type']) && $_POST['way_type']!="" &&
+       		isset($_POST['way_name'])&& $_POST['way_name']!="" && preg_match("#[a-zA-Z]{2,30}#", $_POST['way_name']) &&
+       		isset($_POST['city'])&& $_POST['city']!="" && preg_match("#[a-zA-Z]{2,30}#", $_POST['city']) &&
+       		isset($_POST['zip_code']) && $_POST['zip_code']!="" && preg_match("#^[0-9]{5}$#", $_POST['zip_code'])
+    	   	isset($_POST['accept_terms'])){
+    	    
+			$first_name = $_POST['first_name'];
+			$last_name = $_POST['last_name'];
+			$email = $_POST['email'];
+			$password = $_POST['password'];
+			$way_num = $_POST['way_num'];
+			$way_type = $_POST['way_type'];
+			$way_name = $_POST['way_name'];
+			$city = $_POST['city'];
+			$zip_code = $_POST['zip_code'];
+    	    
+    	    
+			try{
+				PDOConnexion::setParameters('stages', 'root', 'root');
+				$db = PDOConnexion::getInstance();
+				$sql = "
+					INSERT INTO student(`first_name`, `last_name`, `email`, `password`, `way_num`, `way_type`, `way_name`, `city`, `zip_code`)
+							VALUES (:first_name, :last_name, :email, :password, :way_num, :way_type, :way_name, :city, :zip_code)";
+				$sth = $db->prepare($sql);
+				$sth->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Student');
+				$sth->execute(array(
+					':first_name' => $first_name,
+					':last_name' => $last_name,
+					':email' => $email,
+					':password' => Bcrypt::hashPassword($password),
+					':way_num' => $way_num,
+					':way_type' => $way_type,
+					':way_name' => $way_name,
+					':city' => $city,
+					':zip_code' => $zip_code
+				));
+
+				/*if($_FILES['cv']){
+    				echo "FILE UPLOADED!";
+				}*/
+
+				header("location:index.php?page=home");
+			}
+			catch(PDOException$e){
+				echo"<p>Erreur:".$e->getMessage()."</p>";
+				die();
+			}
+		}
+		else{
+			if((!isset($_POST['first_name']) || $_POST['first_name']=="") || 
+			(!isset($_POST['last_name']) || $_POST['last_name']=="") ||
+			(!isset($_POST['email']) || $_POST['email']=="") ||
+			(!isset($_POST['email-confirm']) || $_POST['email-confirm']=="") ||
+			(!isset($_POST['password']) || $_POST['password']=="") ||
+			(!isset($_POST['password-confirm']) || $_POST['password-confirm']=="") ||
+			(!isset($_POST['way_num']) || $_POST['way_num']=="") ||
+			(!isset($_POST['way_type']) || $_POST['way_type']=="") ||
+			(!isset($_POST['way_name']) || $_POST['way_name']=="") ||
+			(!isset($_POST['city']) || $_POST['city']=="") ||
+			(!isset($_POST['zip_code']) || $_POST['zip_code']=="")){
+				App::error('Vous devez remplir tous les champs obligatoires');
+			}
+			if(!preg_match("#^[a-zA-Z]{2,32}$#", $_POST['first_name'])){
+				App::error("Veuillez entrer un prénom approprié");
+			}
+			if(!preg_match("#^[a-zA-Z]{2,32}$#", $_POST['last_name'])){
+				App::error("Veuillez entrer un nom approprié");
+			}
+			if(!preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $_POST['email'])){
+				App::error("Veuillez entrer un email approprié");
+			}
+			if(!preg_match("#^\w{8,}$#", $_POST['password'])){
+				App::error("Veuillez entrer un mot de passe approprié");
+			}
+			if(!preg_match("#^[0-9]{1,}$#", $_POST['way_num'])){
+				App::error("Veuillez entrer un numéro de voie approprié");
+			}
+			if(!preg_match("#[a-zA-Z]{2,30}#", $_POST['way_name'])){
+				App::error("Veuillez entrer un nom de voie approprié");
+			}
+			if(!preg_match("#^[a-zA-Z]{2,32}$#", $_POST['city'])){
+				App::error("Veuillez entrer une ville approprié");
+			}
+			if(!preg_match("#^[0-9]{5}$#", $_POST['zip_code'])){
+				App::error("Veuillez entrer code postal approprié");
+			}
+			if($_POST['email']!=$_POST['email-confirm']){
+				App::error("L'adresse email doit correspondre");
+			}
+			if($_POST['password']!=$_POST['password-confirm']){
+				App::error("Le mot de passe doit correspondre");
+			}
+			if(!isset($_POST['accept_terms'])){
+				App::error("Vous devez accepter les conditions d'utilisation");
+			}
+		}
+	}
+
+?>
 <style type="text/css">
 	form .row {
 		margin-bottom: 20px;
@@ -9,7 +119,7 @@
 
 	<div class="row">
 		<div class="col-md-8">
-			<form name="login" method="POST" action="index.php?page=login">
+			<form name="login" method="POST" action="index.php?page=signup">
 				<div class="row">
 					<div class="col-md-6">
 						<label for="signup-firstname">Prénom</label>
@@ -103,7 +213,7 @@
 					</div>
 				</div>
 
-				<input type="submit" class="btn btn-primary" value="Se connecter">
+				<input type="submit" name="signup" class="btn btn-primary" value="Se connecter">
 			</form>
 		</div>
 	</div>
