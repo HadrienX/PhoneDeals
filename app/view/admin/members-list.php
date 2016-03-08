@@ -28,8 +28,8 @@
 						echo '<td><i class="fa fa-times" style="color: #c0392b;"></i></td>';
 					}
 					echo '<td>' . $member->register_date . '</td>';
-					echo '<td><a href="index.php?page=admin/member-edit&amp;id=' . $member->id . '"><i class="fa fa-pencil"></i></a></td>';
-					echo '<td><a href="#"><i class="fa fa-trash"></i></a></td>';
+					echo '<td><a href="index.php?page=admin/member-edit&amp;id=' . $member->id . '"><i class="fa fa-pencil" data-toggle="tooltip" title="Modifier"></i></a></td>';
+					echo '<td><a href="#"><i class="fa fa-trash" data-toggle="tooltip" title="Supprimer"></i></a></td>';
 				echo '</tr>';
 			}
 		?>

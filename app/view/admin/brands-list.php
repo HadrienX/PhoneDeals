@@ -12,8 +12,8 @@
 				echo '<tr>';
 					echo '<td>' . $brand->id . '</td>';
 					echo '<td>' . $brand->name . '</td>';
-					echo '<td><a href="index.php?page=admin/brand-edit&amp;id=' . $brand->id . '"><i class="fa fa-pencil"></i></a></td>';
-					echo '<td><a href="#"><i class="fa fa-trash"></i></a></td>';
+					echo '<td><a href="index.php?page=admin/brand-edit&amp;id=' . $brand->id . '"><i class="fa fa-pencil" data-toggle="tooltip" title="Modifier"></i></a></td>';
+					echo '<td><a href="#"><i class="fa fa-trash" data-toggle="tooltip" title="Supprimer"></i></a></td>';
 				echo '</tr>';
 			}
 		?>
