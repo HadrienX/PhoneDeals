@@ -3,6 +3,7 @@
 				<div class="row">
 					<div class="col-md-8">
 						<a href="index.php?page=legal">Mentions légales</a>
+						<a href="index.php?page=privacy" style="margin-left:15px">Politique de confidentialité</a>
 					</div>
 					<div class="col-md-4 text-right">
 						Copyright &copy; <?php echo date('Y') . ' <a href="index.php?page=home">' . App::$siteTitle . '</a>'; ?>
