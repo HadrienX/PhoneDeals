@@ -19,6 +19,19 @@
 			$this->$n = $v;
 		}
 
+		public static function getCapacityById($id) {
+			PDOConnexion::setParameters('phonedeals', 'root', 'root');
+			$db = PDOConnexion::getInstance();
+			$sql = 'SELECT * FROM capacity WHERE id = :id';
+			$sth = $db->prepare($sql);
+			$sth->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Capacity');
+			$sth->execute(array(
+				':id' => $id
+			));
+			
+			return $sth->fetch();
+		}
+
 		public static function getCapacityList() {
 			PDOConnexion::setParameters('phonedeals', 'root', 'root');
 			$db = PDOConnexion::getInstance();
