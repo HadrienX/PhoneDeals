@@ -83,5 +83,16 @@
 
 			return $imgUrl;
 		}
+
+		public static function deletePhone($id) {
+			PDOConnexion::setParameters('phonedeals', 'root', 'root');
+			$db = PDOConnexion::getInstance();
+			$sql = 'DELETE FROM phone WHERE id = :id';
+			$sth = $db->prepare($sql);
+			$sth->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Phone');
+			$sth->execute(array(
+				':id' => $id
+			));
+		}
 	}
 ?>
