@@ -22,7 +22,7 @@
 					echo '<td style="max-width: 400px;">' . $phone->description . '</td>';
 
 					echo '<td><a href="index.php?page=admin/phone-edit&amp;id=' . $phone->id . '"><i class="fa fa-pencil" data-toggle="tooltip" title="Modifier"></i></a></td>';
-					echo '<td><a href="#"><i class="fa fa-trash" data-toggle="tooltip" data-action="delete" title="Supprimer"></i></a></td>';
+					echo '<td><a href="#" title="Supprimer" data-toggle="tooltip" data-action="delete" title="Supprimer"><i class="fa fa-trash"></i></a></td>';
 				echo '</tr>';
 			}
 		?>
