@@ -16,6 +16,7 @@
 			}
 		?>
 	</table>
+	<a href="#" class="btn btn-primary">Ajouter un marque</a>
 </div>
 <script>
 	$('[data-action="delete"]').click(function(e) {

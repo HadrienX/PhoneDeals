@@ -70,5 +70,16 @@
 			
 			return $enumList;
 		}
+
+		public static function deleteMember($id) {
+			PDOConnexion::setParameters('phonedeals', 'root', 'root');
+			$db = PDOConnexion::getInstance();
+			$sql = 'DELETE FROM member WHERE id = :id';
+			$sth = $db->prepare($sql);
+			$sth->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Member');
+			$sth->execute(array(
+				':id' => $id
+			));
+		}
 	}
 ?>
