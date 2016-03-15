@@ -6,8 +6,16 @@
 		content: '';
 		width: 25px;
 	}
+
 	.unactive {
 		opacity: 0.15;
+	}
+
+	h4 {
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
+		display: block;
 	}
 </style>
 
@@ -27,19 +35,37 @@
 
 	if (isset($_GET['brand'])) {
 		$sort['brand'] = htmlentities($_GET['brand']);
-		//$url .= '&brand=' . $sort['brand'];
 		$toaddurl['brand']='&brand=' . $sort['brand'];
 	}
+
 	if (isset($_GET['color'])) {
 		$sort['color'] = htmlentities($_GET['color']);
-		//$url .= '&color=' . $sort['color'];
 		$toaddurl['color']='&color=' . $sort['color'];
 	}
+
 	if (isset($_GET['capacity'])) {
 		$sort['capacity'] = htmlentities($_GET['capacity']);
-		//$url .= '&capacity=' . $sort['capacity'];
 		$toaddurl['capacity']=	'&capacity=' . $sort['capacity'];
 	}
+
+	if (isset($_GET['p'])) {
+		if (is_numeric($_GET['p'])) {
+			$page = $_GET['p'];
+		}
+
+		else {
+			$page = 1;
+		}
+	}
+
+	else {
+		$page = 1;
+	}
+
+	$phonesPerPage = 9;
+	$totalPhones = Phone::countPhones();
+	$totalPages = ceil($totalPhones / $phonesPerPage);
+	$start = ($page * $phonesPerPage - $phonesPerPage) + 1;
 ?>
 
 <div class="container">
@@ -50,12 +76,26 @@
 	</div>
 
 	<div class="row">
+		<nav class="col-md-12">
+			<ul class="pagination pull-right">
+				<?php		
+					for ($i = 1 ; $i <= $totalPages ; $i++) {
+						$current = ($i == $page) ? ' class="active"' : '';
+						echo '<li' . $current . '><a href="index.php?page=list&p=' . $i . '">' . $i . '</a></li>';
+					}
+				?>
+			</ul>
+		</nav>
+	</div>
+
+	<div class="row">
 		<div class="col-md-3">
 			<div style="display: block; width: 100%; overflow: hidden;">
 				<h4>Marques</h4>
 				<div class="list-group">
 					<?php
-						$newurl=$url.$toaddurl['capacity'].$toaddurl['color'];
+						$newurl = $url . $toaddurl['capacity'] . $toaddurl['color'];
+						
 						foreach (Brand::getBrandList() as $brand) {
 							$active = ($sort['brand'] == strtolower($brand->name)) ? ' active' : '';
 							echo '<a href="' . $newurl . '&brand=' . strtolower($brand->name) . '" class="list-group-item' . $active . '">' . $brand->name . '</a>';
@@ -67,7 +107,8 @@
 				<h4>Couleur</h4>
 				<ul style="list-style: none; margin: 0; padding: 0; width: 195px;">
 					<?php
-						$newurl=$url.$toaddurl['brand'].$toaddurl['capacity'];
+						$newurl = $url . $toaddurl['brand'] . $toaddurl['capacity'];
+						
 						foreach (Color::getColorList() as $color) {
 							$unactive = ($sort['color'] != $color->id) ? ' class="unactive"' : '';
 
@@ -80,7 +121,8 @@
 				<h4>Capacité</h4>
 				<div class="list-group">
 					<?php
-						$newurl=$url.$toaddurl['brand'].$toaddurl['color'];
+						$newurl = $url . $toaddurl['brand'] . $toaddurl['color'];
+						
 						foreach (Capacity::getCapacityList() as $capacity) {
 							$active = ($sort['capacity'] == $capacity->storage) ? ' active' : '';
 							echo '<a href="' . $newurl . '&capacity=' . $capacity->storage . '" class="list-group-item' . $active . '">' . $capacity->storage . ' Go</a>';
@@ -89,31 +131,54 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-9">
-			<div class="row">
-				<?php
-					foreach (Phone::getPhonesList() as $phone) {
-						if (Promotion::getPromotionByPhoneId($phone->id)) {
-							$phone->promotionPrice = $phone->price - ((Promotion::getPromotionByPhoneId($phone->id)->percent) * 0.01) * $phone->price;
-						}
-						echo '<div class="col-md-4 col-sm-6 col-xs-12" style="text-align: center">';
-							echo '<div style="border: 1px solid #ededed; padding: 30px; margin: 20px 0;">';
-								echo '<a href="index.php?page=product&id=' . $phone->id . '">';
-									echo '<img src="' . Phone::getPhoneThumbnail($phone->id) . '" alt="' . $phone->name . '" style="width: 100px;">';
-									echo '<h4>' . $phone->name . '</h4>';
-								echo '</a>';
-								
-								if (isset($phone->promotionPrice)) {
-									echo '<span class="badge old-price" style="background-color: transparent; color: #777;">' . $phone->price . ' &euro;</span> <span class="badge" style="background: #e74c3c;">' . $phone->promotionPrice . ' &euro;</span>';
-								}
-								else {
-									echo '<span class="badge">' . $phone->price . ' &euro;</span>';
-								}
+
+		<?php if ($_GET['p'] < $totalPages + 1) { ?>
+			<div class="col-md-9">
+				<div class="row">
+					<?php
+						foreach (Phone::getPhonesListPaginate($start, $phonesPerPage) as $phone) {
+							if (Promotion::getPromotionByPhoneId($phone->id)) {
+								$phone->promotionPrice = $phone->price - ((Promotion::getPromotionByPhoneId($phone->id)->percent) * 0.01) * $phone->price;
+							}
+
+							echo '<div class="col-md-4 col-sm-6 col-xs-12" style="text-align: center">';
+								echo '<div style="border: 1px solid #ededed; padding: 30px; margin: 20px 0;">';
+									echo '<a href="index.php?page=product&id=' . $phone->id . '">';
+										echo '<img src="' . Phone::getPhoneThumbnail($phone->id) . '" alt="' . $phone->name . '" style="width: 100px;">';
+										echo '<h4>' . $phone->name . '</h4>';
+									echo '</a>';
+									
+									if (isset($phone->promotionPrice)) {
+										echo '<span class="badge old-price" style="background-color: transparent; height: 18px; color: #777;">' . $phone->price . ' &euro;</span> <span class="badge" style="background: #e74c3c;">' . $phone->promotionPrice . ' &euro;</span>';
+									}
+									else {
+										echo '<span class="badge">' . $phone->price . ' &euro;</span>';
+									}
+								echo '</div>';
 							echo '</div>';
-						echo '</div>';
+						}
+					?>
+				</div>
+			</div>
+		<?php
+			}
+
+			else {
+				echo '<div style="text-align: center;"><i class="fa fa-exclamation-circle" style="font-size: 120px; display: block; color: #e74c3c; margin: 60px 0 20px;"></i>Aucun produit</div>';
+			}
+		?>
+	</div>
+
+	<div class="row">
+		<nav class="col-md-12">
+			<ul class="pagination pull-right">
+				<?php		
+					for ($i = 1 ; $i <= $totalPages ; $i++) {
+						$current = ($i == $page) ? ' class="active"' : '';
+						echo '<li' . $current . '><a href="index.php?page=list&p=' . $i . '">' . $i . '</a></li>';
 					}
 				?>
-			</div>
-		</div>
+			</ul>
+		</nav>
 	</div>
 </div>
