@@ -44,12 +44,41 @@
 		public static function getPhonesList() {
 			PDOConnexion::setParameters('phonedeals', 'root', 'root');
 			$db = PDOConnexion::getInstance();
-			$sql = 'SELECT * FROM phone';
-			$sth = $db->prepare($sql);
+			$sth = $db->prepare('SELECT * FROM phone');
 			$sth->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Phone');
 			$sth->execute();
 			
 			return $sth->fetchAll();
+		}
+
+		public static function getPhonesListPaginate($start, $limit) {
+			PDOConnexion::setParameters('phonedeals', 'root', 'root');
+			$db = PDOConnexion::getInstance();
+			$sth = $db->prepare("SELECT * FROM phone LIMIT $start, $limit");
+			$sth->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Phone');
+			$sth->execute();
+			
+			return $sth->fetchAll();
+		}
+
+		public static function homePhones() {
+			PDOConnexion::setParameters('phonedeals', 'root', 'root');
+			$db = PDOConnexion::getInstance();
+			$sth = $db->prepare('SELECT * FROM phone LIMIT 6');
+			$sth->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Phone');
+			$sth->execute();
+			
+			return $sth->fetchAll();
+		}
+
+		public static function countPhones() {
+			PDOConnexion::setParameters('phonedeals', 'root', 'root');
+			$db = PDOConnexion::getInstance();
+			$sth = $db->prepare('SELECT COUNT(*) as total FROM phone');
+			$sth->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Phone');
+			$sth->execute();
+			
+			return $sth->fetch()->total;
 		}
 
 		public static function getLatestPhones() {
