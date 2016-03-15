@@ -25,7 +25,7 @@
 			
 			else {
 
-				App::error('Veuillez entrer une name.','index.php?page=admin/add-brand');
+				App::error('Veuillez entrer une marque valide.','index.php?page=admin/add-brand');
 
 			}
 		}
