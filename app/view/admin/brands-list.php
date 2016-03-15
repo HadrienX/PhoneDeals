@@ -1,8 +1,7 @@
-<div class="col-md-12">
+<div class="col-md-4">
 	<h1>Liste des marques</h1>
 	<table class="table table-striped">
 		<thead>
-			<th>#</th>
 			<th>Nom</th>
 			<th></th>
 			<th></th>
