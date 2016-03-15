@@ -21,6 +21,7 @@
 
 <?php
 	$url = 'index.php?page=list';
+	
 	$sort = array(
 		'brand' => null,
 		'color' => null,
@@ -132,7 +133,7 @@
 			</div>
 		</div>
 
-		<?php if ($_GET['p'] < $totalPages + 1) { ?>
+		<?php if (!isset($_GET['p']) || $_GET['p'] < $totalPages + 1) { ?>
 			<div class="col-md-9">
 				<div class="row">
 					<?php
