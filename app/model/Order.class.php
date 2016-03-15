@@ -1,7 +1,12 @@
 <?php	
-	class Capacity {
+	class Order {
 		private $id;
-		private $storage;
+		private $member;
+		private $date;
+		private $paid_price;
+		private $paid_price_vat;
+		private $sent_method;
+		private $phones;
 		
 		public function __construct(array $args = array()) {
 			if (!empty($args)) {
@@ -19,12 +24,16 @@
 			$this->$n = $v;
 		}
 
-		public static function getCapacityById($id) {
+		public function __toString(){
+			return $this->name;
+		}
+
+		public static function getOrderById($id) {
 			PDOConnexion::setParameters('phonedeals', 'root', 'root');
 			$db = PDOConnexion::getInstance();
-			$sql = 'SELECT * FROM capacity WHERE id = :id';
+			$sql = 'SELECT * FROM orders WHERE id = :id';
 			$sth = $db->prepare($sql);
-			$sth->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Capacity');
+			$sth->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Order');
 			$sth->execute(array(
 				':id' => $id
 			));
@@ -32,23 +41,23 @@
 			return $sth->fetch();
 		}
 
-		public static function getCapacityList() {
+		public static function getOrdersList() {
 			PDOConnexion::setParameters('phonedeals', 'root', 'root');
 			$db = PDOConnexion::getInstance();
-			$sql = 'SELECT * FROM capacity';
+			$sql = 'SELECT * FROM orders';
 			$sth = $db->prepare($sql);
-			$sth->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Capacity');
+			$sth->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Order');
 			$sth->execute();
 			
 			return $sth->fetchAll();
 		}
 
-		public static function deleteCapacity($id) {
+		public static function deleteOrder($id) {
 			PDOConnexion::setParameters('phonedeals', 'root', 'root');
 			$db = PDOConnexion::getInstance();
-			$sql = 'DELETE FROM capacity WHERE id = :id';
+			$sql = 'DELETE FROM orders WHERE id = :id';
 			$sth = $db->prepare($sql);
-			$sth->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Capacity');
+			$sth->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Order');
 			$sth->execute(array(
 				':id' => $id
 			));

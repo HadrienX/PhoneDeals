@@ -65,5 +65,16 @@
 
 			return trim(trim($colorsNames), ',');
 		}
+
+		public static function deleteColor($id) {
+			PDOConnexion::setParameters('phonedeals', 'root', 'root');
+			$db = PDOConnexion::getInstance();
+			$sql = 'DELETE FROM color WHERE id = :id';
+			$sth = $db->prepare($sql);
+			$sth->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Color');
+			$sth->execute(array(
+				':id' => $id
+			));
+		}
 	}
 ?>

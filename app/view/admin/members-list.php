@@ -1,4 +1,4 @@
-<div class="col-md-8">
+<div class="col-md-12">
 	<h1>Liste des membres</h1>
 	<table class="table table-striped">
 		<thead>

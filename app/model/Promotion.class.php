@@ -63,5 +63,16 @@
 
 			return $phone->price - (($promotion->percent) * 0.01) * $phone->price;
 		}
+
+		public static function deletePromotion($id) {
+			PDOConnexion::setParameters('phonedeals', 'root', 'root');
+			$db = PDOConnexion::getInstance();
+			$sql = 'DELETE FROM promotion WHERE id = :id';
+			$sth = $db->prepare($sql);
+			$sth->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Member');
+			$sth->execute(array(
+				':id' => $id
+			));
+		}
 	}
 ?>
