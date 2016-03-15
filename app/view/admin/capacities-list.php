@@ -18,4 +18,5 @@
 			}
 		?>
 	</table>
+	<a href="index.php?page=admin/add-capacity" class="btn btn-primary">Ajouter une capacité</a>
 </div>
