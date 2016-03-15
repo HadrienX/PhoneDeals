@@ -149,10 +149,11 @@
 									echo '</a>';
 									
 									if (isset($phone->promotionPrice)) {
-										echo '<span class="badge old-price" style="background-color: transparent; height: 18px; color: #777;">' . $phone->price . ' &euro;</span> <span class="badge" style="background: #e74c3c;">' . $phone->promotionPrice . ' &euro;</span>';
+										echo '<span class="badge old-price" style="background-color: transparent; height: 18px; color: #777;">' . number_format($phone->price, 2, ',', ' ') . ' &euro;</span> <span class="badge" style="background: #e74c3c;">' . $phone->promotionPrice . ' &euro;</span>';
 									}
+									
 									else {
-										echo '<span class="badge">' . $phone->price . ' &euro;</span>';
+										echo '<span class="badge">' . number_format($phone->price, 2, ',', ' ') . ' &euro;</span>';
 									}
 								echo '</div>';
 							echo '</div>';
