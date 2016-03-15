@@ -33,7 +33,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
         <h1>Éditer une marque</h1>
     </div>
 
-    <form action="index.php?page=admin/brands-edit&amp;id=<?php echo $id; ?>" method="POST">
+    <form action="index.php?page=admin/brand-edit&amp;id=<?php echo $id; ?>" method="POST">
         <div class="form-group">
             <label for="brands-name">Nom de la marque</label>
             <input type="text" class="form-control" id="brands-name" value="<?php echo $brands->name; ?>" name="name" placeholder="Nom de la marque">
