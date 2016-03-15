@@ -25,6 +25,7 @@
 				}
 			?>
 		</table>
+		<a href="index.php?page=admin/add-promotion" class="btn btn-primary">Ajouter une promotion</a>
 	<?php
 		else :
 			echo '<p>Aucune promotion n\'a été ajouté.</p>';
