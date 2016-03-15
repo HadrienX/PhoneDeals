@@ -6,6 +6,13 @@
 		content: '';
 		width: 25px;
 	}
+
+	h4 {
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
+		display: block;
+	}
 </style>
 
 <div class="container">
@@ -14,7 +21,7 @@
 			<h2>Téléphones</h2>
 			<div class="row">
 				<?php
-					foreach (Phone::getPhonesList() as $phone) {
+					foreach (Phone::homePhones() as $phone) {
 						if (Promotion::getPromotionByPhoneId($phone->id)) {
 							$phone->promotionPrice = $phone->price - ((Promotion::getPromotionByPhoneId($phone->id)->percent) * 0.01) * $phone->price;
 						}
