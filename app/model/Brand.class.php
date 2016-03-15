@@ -46,5 +46,16 @@
 			
 			return $sth->fetchAll();
 		}
+
+		public static function deleteBrand($id) {
+			PDOConnexion::setParameters('phonedeals', 'root', 'root');
+			$db = PDOConnexion::getInstance();
+			$sql = 'DELETE FROM brand WHERE id = :id';
+			$sth = $db->prepare($sql);
+			$sth->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Brand');
+			$sth->execute(array(
+				':id' => $id
+			));
+		}
 	}
 ?>
