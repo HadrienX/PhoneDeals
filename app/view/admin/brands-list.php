@@ -16,7 +16,7 @@
 			}
 		?>
 	</table>
-	<a href="#" class="btn btn-primary">Ajouter un marque</a>
+	<a href="index.php?page=admin/add-brand" class="btn btn-primary">Ajouter un marque</a>
 </div>
 <script>
 	$('[data-action="delete"]').click(function(e) {
