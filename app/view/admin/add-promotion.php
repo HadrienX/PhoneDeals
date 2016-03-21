@@ -2,7 +2,7 @@
 
 		if (isset($_POST['add']) && App::isAdmin()) {
 
-			if (isset($_POST['phone']) && isset($_POST['pourcentage']) && preg_match("#^[0-9]{1,2}$#", $_POST['pourcentage'])){ 
+			if (isset($_POST['phone']) && isset($_POST['pourcentage']) && preg_match("#^([0-9]{1,2}|100)$#", $_POST['pourcentage'])){ 
 		
 				PDOConnexion::setParameters('phonedeals', 'root', 'root');
 				$db = PDOConnexion::getInstance();
