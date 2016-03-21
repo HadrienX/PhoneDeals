@@ -2,6 +2,7 @@
 	if (isset($_GET['id']) && !empty($_GET['id'])) {
 		$id = htmlentities($_GET['id']);
 		$phone = Phone::getPhoneById($id);
+		$brand = Brand::getBrandById($id);
 
 		if (isset($_POST['edit'])) {
 			PDOConnexion::setParameters('phonedeals', 'root', 'root');
@@ -57,7 +58,7 @@
 											$selected = 'selected';
 										}
 
-										echo '<option name="' . $brand->id . '"' . $selected . '>' . $brand->name . '</option>';
+										echo '<option name="' . $brand->name . '" value="' . $brand->id . '"' . $selected . '>' . $brand->name . '</option>';
 									}
 								?>
 							</select>
