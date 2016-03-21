@@ -51,12 +51,21 @@
 			return $sth->fetchAll();
 		}
 
-		public static function getPhonesListPaginate($start, $limit) {
+		public static function getPhonesListPaginate($start, $limit, $sort) {
+			$where = '';
+
+			if ($sort['brand'] || $sort['capacity'] || $sort['color']) {
+				$where = 'WHERE brand = ' . Brand::getBrandIdByName($sort['brand']);
+			}
+
 			PDOConnexion::setParameters('phonedeals', 'root', 'root');
 			$db = PDOConnexion::getInstance();
-			$sth = $db->prepare("SELECT * FROM phone LIMIT $start, $limit");
+			$sql = "SELECT * FROM phone $where LIMIT $start, $limit";
+			$sth = $db->prepare($sql);
 			$sth->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Phone');
 			$sth->execute();
+
+			// App::dd($sth->fetchAll());
 			
 			return $sth->fetchAll();
 		}
@@ -71,10 +80,36 @@
 			return $sth->fetchAll();
 		}
 
-		public static function countPhones() {
+		public static function countPhones($sort) {
+			$where = '';
+
+			if ($sort['brand'] || $sort['capacity'] || $sort['color']) {
+				$where = 'WHERE ';
+				
+				if ($sort['brand']) {
+					$where .= 'brand = ' . Brand::getBrandIdByName($sort['brand']);
+
+					if ($sort['color'] || $sort['capacity']) {
+						$where .= ' && ';
+					}
+				}
+
+				if ($sort['color']) {
+					$where .= 'color = 1';
+
+					if ($sort['capacity']) {
+						$where .= ' && ';
+					}
+				}
+
+				if ($sort['capacity']) {
+					$where .= 'capacity = 16';
+				}
+			}
+
 			PDOConnexion::setParameters('phonedeals', 'root', 'root');
 			$db = PDOConnexion::getInstance();
-			$sth = $db->prepare('SELECT COUNT(*) as total FROM phone');
+			$sth = $db->prepare('SELECT COUNT(*) as total FROM phone ' . $where);
 			$sth->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Phone');
 			$sth->execute();
 			
