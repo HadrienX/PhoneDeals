@@ -69,6 +69,7 @@
 	$totalPages = ceil($totalPhones / $phonesPerPage);
 
 	$phoneRequest = Phone::getPhonesListPaginate($start, $phonesPerPage, $sort);
+	$newurl = $url . $toaddurl['brand'] . $toaddurl['color'];
 ?>
 
 <div class="container">
@@ -76,6 +77,19 @@
 		<div class="col-md-12 page-header">
 			<h1>Liste des téléphones</h1>
 		</div>
+	</div>
+
+	<div class="row">
+		<nav class="col-md-12">
+			<ul class="pagination pull-right">
+				<?php		
+					for ($i = 1 ; $i <= $totalPages ; $i++) {
+						$current = ($i == $page) ? ' class="active"' : '';
+						echo '<li' . $current . '><a href="' . $newurl . '&p=' . $i . '">' . $i . '</a></li>';
+					}
+				?>
+			</ul>
+		</nav>
 	</div>
 
 	<div class="row">
