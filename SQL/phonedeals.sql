@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost:8889
--- Généré le :  Mar 15 Mars 2016 à 15:06
+-- Généré le :  Lun 21 Mars 2016 à 10:31
 -- Version du serveur :  5.5.38
 -- Version de PHP :  5.6.2
 
@@ -69,7 +69,7 @@ CREATE TABLE `color` (
 `id` int(11) NOT NULL,
   `name` varchar(128) NOT NULL,
   `hex` varchar(7) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `color`
@@ -89,7 +89,8 @@ INSERT INTO `color` (`id`, `name`, `hex`) VALUES
 (11, 'Argent', '#d0d0d4'),
 (12, 'Gris sidéral', '#9b9ba0'),
 (13, 'Bordeaux', '#54161f'),
-(14, 'Violet', '#663399');
+(14, 'Violet', '#663399'),
+(15, 'Orange', '#FFA500');
 
 -- --------------------------------------------------------
 
@@ -135,7 +136,7 @@ CREATE TABLE `orders` (
   `paid_price_vat` double NOT NULL,
   `sent_method` enum('Normale','Express') CHARACTER SET utf8 NOT NULL,
   `phones` varchar(1024) CHARACTER SET utf8 NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `orders`
@@ -182,20 +183,20 @@ CREATE TABLE `phone` (
 INSERT INTO `phone` (`id`, `name`, `brand`, `capacity`, `price`, `color`, `description`) VALUES
 (1, 'LG L Bello II', 1, '16', 109.99, '1,2', 'Héritée du design du G3, les touches de contrôle\r\nsituées sur la coque arrière font leur apparition sur le L Bello. Esthétiques et pratiques, elles remplacent les boutons sur le côté et s''avèrent bien plus pratique à utiliser au quotidien.'),
 (2, 'LG G3S', 1, '16,32', 169.99, '1,2', 'Le nouveau LG G3 au design sobre, est\r\ntout simplement révolutionnaire, grâce à son grand écran QuadHD, un appareil photo de 13 Mégapixels et un processeur de 2,46GHz. Incarnant l''association parfaite de beauté et performance, il constitue le choix de l''excellence by LG.'),
-(3, 'LG G4 Stylus', 1, '16,32,64,128', 184, '1,2,11', 'Le smartphone LG G4 Stylus est un\r\ntéléphone pratique à utiliser au quotidien grâce à son écran géant 5,7 pouces, son stylet, sa connectivité 4G, ses appareils photos performants...'),
-(4, 'LG Spirit', 1, '16,32', 129, '1,2,11', 'Disposant d''un écran tactile HD de 4.7",\r\nle LG C70 Spirit est propulsé par un processeur Qualcomm Snapdragon 410 Quad-Core cadencé à 1.2 GHz et Android 5.0 Lollipop. Le smartphone LG Spirit vous garantit une expérience riche, en photo, vidéo, musique ou même en jeu. Le LG C70 Spirit est un passeport à prix réduit vers l''expérience multimédia mobile.'),
-(5, 'LG Leon Y50', 1, '16,32', 115.5, '1,2,11', 'Le LG LEON 4G est un smartphone\r\nultra rapide et performant grâce à ses 4 coeurs ! Une fluidité optimale pour jouer et surfer sans limite ! Avec ses 1,09 cm d’épaisseur et son grand écran 4,5’’, le LG LEON 4G vous dévoile un design sophistiqué aux détails soignés.'),
+(3, 'LG G4 Stylus', 1, '16,32,64,128', 184, '1,2', 'Le smartphone LG G4 Stylus est un\r\ntéléphone pratique à utiliser au quotidien grâce à son écran géant 5,7 pouces, son stylet, sa connectivité 4G, ses appareils photos performants...'),
+(4, 'LG Spirit', 1, '16,32', 129, '1,2', 'Disposant d''un écran tactile HD de 4.7",\r\nle LG C70 Spirit est propulsé par un processeur Qualcomm Snapdragon 410 Quad-Core cadencé à 1.2 GHz et Android 5.0 Lollipop. Le smartphone LG Spirit vous garantit une expérience riche, en photo, vidéo, musique ou même en jeu. Le LG C70 Spirit est un passeport à prix réduit vers l''expérience multimédia mobile.'),
+(5, 'LG Leon Y50', 1, '16,32', 115.5, '1,2', 'Le LG LEON 4G est un smartphone\r\nultra rapide et performant grâce à ses 4 coeurs ! Une fluidité optimale pour jouer et surfer sans limite ! Avec ses 1,09 cm d’épaisseur et son grand écran 4,5’’, le LG LEON 4G vous dévoile un design sophistiqué aux détails soignés.'),
 (6, 'LG F60', 1, '16,32', 121, '1,2', 'LG F60 | ECRAN 4,5" (11,4CM) 800X480 | PROCESSEUR QUAD CORE 1,2 GHZ | BATTERIE 2100 MAH | APN 5MP | ANDROID 4.4.2 KITKAT | KNOCK CODE | 4G'),
-(7, 'LG G2 Mini', 1, '16,32', 179, '1,2,9', 'Avec son design élégant et ses bords extrêmement fins et sans bouton, vous bénéficierez d''un grand écran dans un format mini.'),
-(8, 'LG GFlex 2', 1, '16,32,64,128', 288, '1', ' Avec Android 5.0 Lollipop, votre téléphone LG montrera tout son potentiel : Mode Invité, mode « ne pas déranger », un accès rapide aux dernières applications et tous les avantages de ce tout dernier système d’exploitation.'),
-(9, 'LG L Bello II', 1, '16,32', 114.99, '1,9,12', 'Son large écran 5" vous permet une navigation plus intuitive et un affichage plus clair des applications.\r\nIl mettra en valeur toutes vos photos et vidéos.'),
-(10, 'LG Nexus 5x', 1, '16,32', 350.19, '1', 'Fonctionne avec tous les opérateurs. Système : Android 6.0 Marshmallow Processeur : Hexa-core / 1,8 GHz / Qualcomm Snapdragon 808 / Processeur graphique (GPU) : Adreno 418 Mémoires :\r\nInterne : 32 Go / RAM : 2 GoAffichage : 5,2 pouces / LCD / Rés'),
-(11, 'Nokia Lumia 920', 2, '16,32', 369, '1,2,3,4,5,12', 'Goûtez à l''Internet ultra rapide sur votre smartphone Nokia 4G. Regardez la télé, achetez en ligne et accédez aux réseaux sociaux et divertissement où que vous soyez et en un clin d’oeil. Les nouveaux Nokia Lumia 920 et 820 avec Windows Phone 8 sont prêts pour la 4G.'),
-(12, 'Nokia Lumia 950', 2, '16,32,64,128', 569.99, '1,3,4,5,12', 'Des fonctionnalités haut de gamme, un design unique, et toute l’expérience Windows 10. Découvrez le smartphone qui fonctionne comme un PC et profitez de chaque moment pour accomplir de belles choses.'),
-(13, 'Nokia Lumia 830', 2, '16,32,64,128', 349, '1,2,6', 'Le Nokia Lumia 830 est conçu pour une vie en mouvement. Prenez des photos épatantes avec l''appareil photo PureView, synchronisez votre vie numérique avec OneDrive et partagez vos grands moments sur vos réseaux sociaux préférés - c''est le smartphone idéal pour les gens qui aiment rester connectés.'),
-(14, 'Nokia Lumia 435', 2, '16,32,64,128', 113.6, '1,2,6', 'Le Lumia 435 est robuste et facile à utiliser. Il dispose de la dernière version logicielle et des services Microsoft les plus appréciés comme Skype, Office, et OneDrive, déjà pré-installés et gratuits. Il s''agit d''une expérience smartphone inédite à ce niveau de prix, avec des services généralement destinés aux plus hauts de gamme.'),
-(15, 'Nokia Lumia 532', 2, '16,32,64,128', 90.32, '1,2,6', 'Le Lumia 532 Double SIM est un\r\npuissant smartphone équipé de la dernière version logicielle et des meilleures fonctionnalités Windows. Il possède un processeur quadricœur Snapdragon et dispose des services Microsoft les plus populaires comme Skype, OneDrive, et Office : faites-en plus avec un smartphone réactif et simple à utiliser.'),
-(16, 'Nokia Lumia 620', 2, '16,32,64,128', 69, '2,3,5,6', 'Avec un processeur double cœur de 1 GHz SnapDragon S4, un appareil photo autofocus 5 MP et toute une gamme de coloris.'),
+(7, 'LG G2 Mini', 1, '16,32', 179, '1,2', 'Avec son design élégant et ses bords extrêmement fins et sans bouton, vous bénéficierez d''un grand écran dans un format mini.'),
+(8, 'LG GFlex 2', 1, '16,32,64,128', 288, '1,2', ' Avec Android 5.0 Lollipop, votre téléphone LG montrera tout son potentiel : Mode Invité, mode « ne pas déranger », un accès rapide aux dernières applications et tous les avantages de ce tout dernier système d’exploitation.'),
+(9, 'LG G5', 1, '16,32', 114.99, '1', 'Son large écran 5" vous permet une navigation plus intuitive et un affichage plus clair des applications.\r\nIl mettra en valeur toutes vos photos et vidéos.'),
+(10, 'LG Nexus 5x', 1, '16,32', 350.19, '1,2,3', 'Fonctionne avec tous les opérateurs. Système : Android 6.0 Marshmallow Processeur : Hexa-core / 1,8 GHz / Qualcomm Snapdragon 808 / Processeur graphique (GPU) : Adreno 418 Mémoires :\r\nInterne : 32 Go / RAM : 2 GoAffichage : 5,2 pouces / LCD / Rés'),
+(11, 'Nokia Lumia 920', 2, '16,32', 369, '1,2,4', 'Goûtez à l''Internet ultra rapide sur votre smartphone Nokia 4G. Regardez la télé, achetez en ligne et accédez aux réseaux sociaux et divertissement où que vous soyez et en un clin d’oeil. Les nouveaux Nokia Lumia 920 et 820 avec Windows Phone 8 sont prêts pour la 4G.'),
+(12, 'Nokia Lumia 950', 2, '16,32,64,128', 569.99, '1', 'Des fonctionnalités haut de gamme, un design unique, et toute l’expérience Windows 10. Découvrez le smartphone qui fonctionne comme un PC et profitez de chaque moment pour accomplir de belles choses.'),
+(13, 'Nokia Lumia 830', 2, '16,32,64,128', 349, '1,2,6,15', 'Le Nokia Lumia 830 est conçu pour une vie en mouvement. Prenez des photos épatantes avec l''appareil photo PureView, synchronisez votre vie numérique avec OneDrive et partagez vos grands moments sur vos réseaux sociaux préférés - c''est le smartphone idéal pour les gens qui aiment rester connectés.'),
+(14, 'Nokia Lumia 435', 2, '16,32,64,128', 113.6, '1,2,15', 'Le Lumia 435 est robuste et facile à utiliser. Il dispose de la dernière version logicielle et des services Microsoft les plus appréciés comme Skype, Office, et OneDrive, déjà pré-installés et gratuits. Il s''agit d''une expérience smartphone inédite à ce niveau de prix, avec des services généralement destinés aux plus hauts de gamme.'),
+(15, 'Nokia Lumia 532', 2, '16,32,64,128', 90.32, '1,2,6,15', 'Le Lumia 532 Double SIM est un\r\npuissant smartphone équipé de la dernière version logicielle et des meilleures fonctionnalités Windows. Il possède un processeur quadricœur Snapdragon et dispose des services Microsoft les plus populaires comme Skype, OneDrive, et Office : faites-en plus avec un smartphone réactif et simple à utiliser.'),
+(16, 'Nokia Lumia 620', 2, '16,32,64,128', 69, '2,3,5,6,15', 'Avec un processeur double cœur de 1 GHz SnapDragon S4, un appareil photo autofocus 5 MP et toute une gamme de coloris.'),
 (17, 'Nokia Lumia 1320', 2, '16,32,64', 249.99, '1,2,4,5', 'Le Nokia Lumia 1320 est le smartphone pour les professionnels : il embarque Microsoft Office, des applis professionnelles comme Microsoft Exchange, Office 365 et Lync, et une sécurité de niveau professionnel pour vous garantir confidentialité et sérénité.'),
 (18, 'Nokia Lumia 640', 2, '16,32,64,128', 169, '1,2,3', 'Dès la sortie de sa boite, votre Lumia 640 4G Double SIM vous fait profiter de la gamme complète de services Microsoft gratuits qui y sont intégrés et prêts à fonctionner. Communiquez avec vos proches sur Skype, profitez de l''accès instantané à vos photos et musiques sur OneDrive, et modifiez vos fichiers avec Microsoft Office où que vous soyez. Il est équipé pour répondre à tous vos besoins, que ce soit pour le travail ou les loisirs.'),
 (19, 'Nokia Lumia 1020', 2, '16,32', 356, '1,2,5', 'Le premier smartphone intégrant un appareil photo de 41 mégapixels. Une multitude des réglages sont à votre disposition dans différentes applications pour vous permettre de prendre des photos d’une qualité incomparable et de les retoucher à l’infini !'),
@@ -340,7 +341,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 -- AUTO_INCREMENT pour la table `color`
 --
 ALTER TABLE `color`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT pour la table `member`
 --
@@ -350,7 +351,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 -- AUTO_INCREMENT pour la table `orders`
 --
 ALTER TABLE `orders`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `order_phone`
 --
