@@ -36,6 +36,19 @@
 			return $sth->fetch();
 		}
 
+		public static function getBrandIdByName($name) {
+			PDOConnexion::setParameters('phonedeals', 'root', 'root');
+			$db = PDOConnexion::getInstance();
+			$sql = 'SELECT * FROM brand WHERE name = :name';
+			$sth = $db->prepare($sql);
+			$sth->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Brand');
+			$sth->execute(array(
+				':name' => strtolower($name)
+			));
+			
+			return $sth->fetch()->id;
+		}
+
 		public static function getBrandList() {
 			PDOConnexion::setParameters('phonedeals', 'root', 'root');
 			$db = PDOConnexion::getInstance();
@@ -45,17 +58,6 @@
 			$sth->execute();
 			
 			return $sth->fetchAll();
-		}
-
-		public static function deleteBrand($id) {
-			PDOConnexion::setParameters('phonedeals', 'root', 'root');
-			$db = PDOConnexion::getInstance();
-			$sql = 'DELETE FROM brand WHERE id = :id';
-			$sth = $db->prepare($sql);
-			$sth->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Brand');
-			$sth->execute(array(
-				':id' => $id
-			));
 		}
 	}
 ?>
