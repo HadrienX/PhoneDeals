@@ -28,25 +28,25 @@
 		'capacity' => null
 	);
 
-	$toaddurl =array (
-		'brand' => "",
-		'color' => "",
-		'capacity' => ""
+	$toaddurl = array (
+		'brand' => '',
+		'color' => '',
+		'capacity' => ''
 	);
 
 	if (isset($_GET['brand'])) {
 		$sort['brand'] = htmlentities($_GET['brand']);
-		$toaddurl['brand']='&brand=' . $sort['brand'];
+		$toaddurl['brand'] = '&brand=' . $sort['brand'];
 	}
 
 	if (isset($_GET['color'])) {
 		$sort['color'] = htmlentities($_GET['color']);
-		$toaddurl['color']='&color=' . $sort['color'];
+		$toaddurl['color'] = '&color=' . $sort['color'];
 	}
 
 	if (isset($_GET['capacity'])) {
 		$sort['capacity'] = htmlentities($_GET['capacity']);
-		$toaddurl['capacity']=	'&capacity=' . $sort['capacity'];
+		$toaddurl['capacity'] = '&capacity=' . $sort['capacity'];
 	}
 
 	if (isset($_GET['p'])) {
@@ -64,9 +64,11 @@
 	}
 
 	$phonesPerPage = 9;
-	$totalPhones = Phone::countPhones();
+	$start = ($page * $phonesPerPage - $phonesPerPage);
+	$totalPhones = Phone::countPhones($sort);
 	$totalPages = ceil($totalPhones / $phonesPerPage);
-	$start = ($page * $phonesPerPage - $phonesPerPage) + 1;
+
+	$phoneRequest = Phone::getPhonesListPaginate($start, $phonesPerPage, $sort);
 ?>
 
 <div class="container">
@@ -74,19 +76,6 @@
 		<div class="col-md-12 page-header">
 			<h1>Liste des téléphones</h1>
 		</div>
-	</div>
-
-	<div class="row">
-		<nav class="col-md-12">
-			<ul class="pagination pull-right">
-				<?php		
-					for ($i = 1 ; $i <= $totalPages ; $i++) {
-						$current = ($i == $page) ? ' class="active"' : '';
-						echo '<li' . $current . '><a href="index.php?page=list&p=' . $i . '">' . $i . '</a></li>';
-					}
-				?>
-			</ul>
-		</nav>
 	</div>
 
 	<div class="row">
@@ -137,7 +126,7 @@
 			<div class="col-md-9">
 				<div class="row">
 					<?php
-						foreach (Phone::getPhonesListPaginate($start, $phonesPerPage) as $phone) {
+						foreach ($phoneRequest as $phone) {
 							if (Promotion::getPromotionByPhoneId($phone->id)) {
 								$phone->promotionPrice = $phone->price - ((Promotion::getPromotionByPhoneId($phone->id)->percent) * 0.01) * $phone->price;
 							}
@@ -177,7 +166,7 @@
 				<?php		
 					for ($i = 1 ; $i <= $totalPages ; $i++) {
 						$current = ($i == $page) ? ' class="active"' : '';
-						echo '<li' . $current . '><a href="index.php?page=list&p=' . $i . '">' . $i . '</a></li>';
+						echo '<li' . $current . '><a href="' . $newurl . '&p=' . $i . '">' . $i . '</a></li>';
 					}
 				?>
 			</ul>
