@@ -18,6 +18,7 @@
 			}
 		?>
 	</table>
+	<a href="index.php?page=admin/add-color" class="btn btn-primary">Ajouter une couleur</a>
 </div>
 <script>
 	$('[data-action="delete"]').click(function(e) {
