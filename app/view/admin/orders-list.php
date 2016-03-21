@@ -21,7 +21,7 @@
 					echo '<td>' . $order->sent_method . '</td>';
 					echo '<td>' . $order->phones . '</td>';
 
-					echo '<td><a href="#"><i class="fa fa-pencil" data-toggle="tooltip" title="Modifier"></i></a></td>';
+					echo '<td><a href="index.php?page=admin/color-edit&amp;id=' . $color->id . '"><i class="fa fa-pencil" data-toggle="tooltip" title="Modifier"></i></a></td>';
 					echo '<td><a href="#" title="Supprimer" data-toggle="tooltip" data-action="delete" title="Supprimer"><i class="fa fa-trash"></i></a></td>';
 				echo '</tr>';
 			}
