@@ -1,5 +1,7 @@
 <div class="col-md-12">
-	<h1>Liste des téléphones</h1>
+	<h1>Liste des téléphones
+		<a href="index.php?page=admin/add-phone" class="btn btn-primary pull-right">Ajouter un téléphone</a>
+	</h1>
 	<table class="table table-striped">
 		<thead>
 			<th>Nom</th>
@@ -17,7 +19,7 @@
 					echo '<td><a href="index.php?page=admin/phone-edit&amp;id=' . $phone->id . '">' . $phone->name . '</a></td>';
 					echo '<td>' . Brand::getBrandById($phone->brand) . '</td>';
 					echo '<td>' . $phone->capacity . ' Go</td>';
-					echo '<td>' . money_format('%!i', $phone->price) . ' &euro;</td>';
+					echo '<td>' . $phone->price . ' &euro;</td>';
 					echo '<td>' . Color::getColorsNames($phone->color, true) . '</td>';
 					echo '<td style="max-width: 400px;">' . $phone->description . '</td>';
 
@@ -27,6 +29,7 @@
 			}
 		?>
 	</table>
+	<a href="index.php?page=admin/add-phone" class="btn btn-primary">Ajouter un téléphone</a>
 </div>
 
 <script>
