@@ -4,7 +4,7 @@
 
 			if (isset($_POST['name']) && preg_match("#^[a-zA-Z0-9]{2,32}#", $_POST['name']) &&
 				isset($_POST['brand']) && preg_match("#^[0-9]{1}#", $_POST['brand']) &&
-				isset($_POST['capacity']) &&
+				isset($_POST['capacity']) && is_numeric($_POST['capacity']) &&
 				isset($_POST['price']) && preg_match("#^[0-9]#", $_POST['price']) &&
 				isset($_POST['color']) &&
 				isset($_POST['description']) && preg_match("#^[a-zA-Z0-9._-]#", $_POST['description'])){
@@ -33,16 +33,19 @@
 			
 			else {
 				if(!preg_match("#^[a-zA-Z0-9]{2,32}#", $_POST['name'])){
-					App::error('Veuillez entrer un nom valide.','index.php?page=admin/add-color');
+					App::error('Veuillez entrer un nom valide.','index.php?page=admin/add-phone');
 				}
 				if(!preg_match("#^[0-9]{1}#", $_POST['brand'])){
-					App::error('Veuillez choisir une marque valide.','index.php?page=admin/add-color');
+					App::error('Veuillez choisir une marque valide.','index.php?page=admin/add-phone');
 				}
 				if(!preg_match("#^[0-9.,]#", $_POST['price'])){
-					App::error('Veuillez choisir un prix valide.','index.php?page=admin/add-color');
+					App::error('Veuillez entrer un prix valide.','index.php?page=admin/add-phone');
 				}
 				if(!preg_match("#^[a-zA-Z0-9._-]#", $_POST['description'])){
-					App::error('Veuillez choisir une description valide.','index.php?page=admin/add-color');
+					App::error('Veuillez entrer une description valide.','index.php?page=admin/add-phone');
+				}
+				if(!is_numeric($_POST['capacity'])){
+					App::error('Veuillez choisir une capacité valide.','index.php?page=admin/add-phone');
 				}
 			}
 		}
