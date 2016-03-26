@@ -3,8 +3,13 @@
 		$id = htmlentities($_GET['id']);
 		$phone = Phone::getPhoneById($id);
 		$brand = Brand::getBrandById($id);
-
-		if (isset($_POST['edit'])) {
+		if (isset($_POST['edit']) &&
+		isset($_POST['name']) && preg_match("#^[a-zA-Z0-9]{2,32}#", $_POST['name']) &&
+		isset($_POST['brand']) && preg_match("#^[0-9]{1}#", $_POST['brand']) &&
+		isset($_POST['capacity']) &&
+		isset($_POST['price']) && preg_match("#^[0-9]#", $_POST['price']) &&
+		isset($_POST['color']) &&
+		isset($_POST['description']) && preg_match("#^[a-zA-Z0-9._-]#", $_POST['description'])) {
 			PDOConnexion::setParameters('phonedeals', 'root', 'root');
 			$db = PDOConnexion::getInstance();
 			$sql = "
@@ -33,7 +38,21 @@
 				App::success('Ce téléphone a bien été modifié');
 			}
 		}
-
+		else{
+			if(!preg_match("#^[a-zA-Z0-9]{2,32}#", $_POST['name'])){
+				App::error('Veuillez entrer un nom valide.','index.php?page=admin/add-color');
+			}
+			if(!preg_match("#^[0-9]{1}#", $_POST['brand'])){
+				App::error('Veuillez choisir une marque valide.','index.php?page=admin/add-color');
+			}
+			if(!preg_match("#^[0-9.,]#", $_POST['price'])){
+				App::error('Veuillez choisir un prix valide.','index.php?page=admin/add-color');
+			}
+			if(!preg_match("#^[a-zA-Z0-9._-]#", $_POST['description'])){
+				App::error('Veuillez choisir une description valide.','index.php?page=admin/add-color');
+			}
+		}
+		
 		if ($phone) :
 ?>
 				<div class="col-md-8">
@@ -57,7 +76,6 @@
 										if ($brand->id == $phone->brand) {
 											$selected = 'selected';
 										}
-
 										echo '<option name="' . $brand->name . '" value="' . $brand->id . '"' . $selected . '>' . $brand->name . '</option>';
 									}
 								?>
@@ -68,14 +86,11 @@
 							<label for="phone-capacity" style="width: 100%;">Capacité</label>
 							<?php
 								$phone->capacity = explode(',', $phone->capacity);
-
 								foreach (Capacity::getCapacityList() as $capacity) {
 									$checked = '';
-
 									if (in_array($capacity->storage, $phone->capacity)) {
 										$checked = 'checked';
 									}
-
 									echo '
 										<label class="checkbox-inline"><input type="checkbox" name="capacity[]" value="' . $capacity->storage . '"' . $checked . '> ' . $capacity->storage . ' Go</label>
 									';
@@ -87,14 +102,11 @@
 							<label for="phone-color" style="width: 100%;">Couleur</label>
 							<?php
 								$phone->color = explode(',', $phone->color);
-
 								foreach (Color::getColorList() as $color) {
 									$checked = '';
-
 									if (in_array($color->id, $phone->color)) {
 										$checked = 'checked';
 									}
-
 									echo '
 										<label class="checkbox-inline"><input type="checkbox" name="color[]" value="' . $color->id . '"' . $checked . '> ' . $color->name . '</label>
 									';
@@ -123,7 +135,6 @@
 			App::redirect('index.php?page=admin/phones-list');
 		endif;
 	}
-
 	else {
 		App::redirect('index.php?page=admin/phones-list');
 	}
