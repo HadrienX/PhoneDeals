@@ -3,53 +3,54 @@
 		$id = htmlentities($_GET['id']);
 		$phone = Phone::getPhoneById($id);
 		$brand = Brand::getBrandById($id);
-		if (isset($_POST['edit']) &&
-		isset($_POST['name']) && preg_match("#^[a-zA-Z0-9]{2,32}#", $_POST['name']) &&
-		isset($_POST['brand']) && preg_match("#^[0-9]{1}#", $_POST['brand']) &&
-		isset($_POST['capacity']) &&
-		isset($_POST['price']) && preg_match("#^[0-9]#", $_POST['price']) &&
-		isset($_POST['color']) &&
-		isset($_POST['description']) && preg_match("#^[a-zA-Z0-9._-]#", $_POST['description'])) {
-			PDOConnexion::setParameters('phonedeals', 'root', 'root');
-			$db = PDOConnexion::getInstance();
-			$sql = "
-				UPDATE phone
-				SET name = :name,
-					brand = :brand,
-					capacity = :capacity,
-					price = :price,
-					color = :color,
-					description = :description
-				WHERE id = :id
-			";
-			$sth = $db->prepare($sql);
-			$sth->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Phone');
-			$sth->execute(array(
-				':id' => $id,
-				':name' => $_POST['name'],
-				':brand' => $_POST['brand'],
-				':capacity' => implode(',', $_POST['capacity']),
-				':price' => $_POST['price'],
-				':color' => implode(',', $_POST['color']),
-				':description' => $_POST['description']
-			));
-			
-			if ($sth) {
-				App::success('Ce téléphone a bien été modifié');
+		if (isset($_POST['edit'])){
+			if(isset($_POST['name']) && preg_match("#^[a-zA-Z0-9]{2,32}#", $_POST['name']) &&
+			isset($_POST['brand']) && preg_match("#^[0-9]{1}#", $_POST['brand']) &&
+			isset($_POST['capacity']) &&
+			isset($_POST['price']) && preg_match("#^[0-9]#", $_POST['price']) &&
+			isset($_POST['color']) &&
+			isset($_POST['description']) && preg_match("#^[a-zA-Z0-9._-]#", $_POST['description'])) {
+				PDOConnexion::setParameters('phonedeals', 'root', 'root');
+				$db = PDOConnexion::getInstance();
+				$sql = "
+					UPDATE phone
+					SET name = :name,
+						brand = :brand,
+						capacity = :capacity,
+						price = :price,
+						color = :color,
+						description = :description
+					WHERE id = :id
+				";
+				$sth = $db->prepare($sql);
+				$sth->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Phone');
+				$sth->execute(array(
+					':id' => $id,
+					':name' => $_POST['name'],
+					':brand' => $_POST['brand'],
+					':capacity' => implode(',', $_POST['capacity']),
+					':price' => $_POST['price'],
+					':color' => implode(',', $_POST['color']),
+					':description' => $_POST['description']
+				));
+				
+				if ($sth) {
+					App::success('Ce téléphone a bien été modifié');
+				}
 			}
-		}
-		else{
-			if(!preg_match("#^[a-zA-Z0-9]{2,32}#", $_POST['name'])){
-				App::error('Veuillez entrer un nom valide.','index.php?page=admin/add-color');
-			}
-			if(!preg_match("#^[0-9]{1}#", $_POST['brand'])){
-				App::error('Veuillez choisir une marque valide.','index.php?page=admin/add-color');
-			}
-			if(!preg_match("#^[0-9.,]#", $_POST['price'])){
-				App::error('Veuillez choisir un prix valide.','index.php?page=admin/add-color');
-			}
-			if(!preg_match("#^[a-zA-Z0-9._-]#", $_POST['description'])){
-				App::error('Veuillez choisir une description valide.','index.php?page=admin/add-color');
+			else{
+				if(!preg_match("#^[a-zA-Z0-9]{2,32}#", $_POST['name'])){
+					App::error('Veuillez entrer un nom valide.','index.php?page=admin/add-color');
+				}
+				if(!preg_match("#^[0-9]{1}#", $_POST['brand'])){
+					App::error('Veuillez choisir une marque valide.','index.php?page=admin/add-color');
+				}
+				if(!preg_match("#^[0-9.,]#", $_POST['price'])){
+					App::error('Veuillez choisir un prix valide.','index.php?page=admin/add-color');
+				}
+				if(!preg_match("#^[a-zA-Z0-9._-]#", $_POST['description'])){
+					App::error('Veuillez choisir une description valide.','index.php?page=admin/add-color');
+				}
 			}
 		}
 		
