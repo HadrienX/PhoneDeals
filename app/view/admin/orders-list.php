@@ -1,5 +1,7 @@
 <div class="col-md-12">
-	<h1>Liste des commandes</h1>
+	<h1>Liste des commandes
+		<a href="index.php?page=admin/add-order" class="btn btn-primary pull-right">Ajouter une commande</a>
+	</h1>
 	<table class="table table-striped">
 		<thead>
 			<th>Membre</th>
@@ -27,6 +29,7 @@
 			}
 		?>
 	</table>
+	<a href="index.php?page=admin/add-order" class="btn btn-primary">Ajouter une commande</a>
 </div>
 <script>
 	$('[data-action="delete"]').click(function(e) {
