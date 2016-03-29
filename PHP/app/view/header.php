@@ -9,7 +9,6 @@
 		<title><?php echo App::$siteTitle; ?></title>
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
-		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -66,7 +65,7 @@
 						<li<?php App::isCurrentPage('about'); ?>><a href="index.php?page=about">À propos</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="index.php?page=cart"><i class="fa fa-shopping-cart"></i> 0</a></li>
+						<li><a href="index.php?page=cart"><i class="fa fa-shopping-cart"></i> <?php echo $_SESSION['cart']['phone_total']; ?></a></li>
 						<?php if (App::isLogged()) : ?>
 							<?php $member = Member::getMemberById($_SESSION['id']); ?>
 							<li class="dropdown">
