@@ -12,7 +12,6 @@
 						<img src="<?php echo App::getGravatar($member->email); ?>" alt="Avatar de <?php echo $member->first_name; ?>" />
 					</div>
 
-
 					<div class="col-md-9">
 						<h3>Email</h3>
 						<?php echo $member->email; ?>
@@ -26,8 +25,6 @@
 						<?php echo $member->register_date; ?><br />
 						<a href="#" class="btn btn-lg btn-primary" style="margin-top: 30px;">Éditer</a>
 					</div>
-
-					
 				</div>
 			</div>
 		</div>
@@ -36,6 +33,6 @@
 	}
 
 	else {
-		App::getHeader(404);
+		App::getHeader(404, $msg);
 	}
 ?>
