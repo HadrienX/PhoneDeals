@@ -72,7 +72,6 @@
 		}
 		else{
 	
-
 			if(!preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $_POST['email'])){
 				App::error("Veuillez entrer un email approprié");
 			}
@@ -121,13 +120,10 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<div class="row" style="margin-bottom: 15px;">
-					<div class="col-md-12">
-						<h1>Votre profil</h1>
 					</div>
 				</div>
 				<div class="row">
-				<div class="col-md-3">
+					<div class="col-md-3">
 						<img src="<?php echo App::getGravatar($member->email); ?>" alt="Avatar de <?php echo $member->first_name; ?>" />
 					</div>
 					
@@ -140,20 +136,6 @@
 								</div>
 							</div>
 
-<<<<<<< Updated upstream
-					<div class="col-md-9">
-						<h3>Email</h3>
-						<?php echo $member->email; ?>
-						<h3>Adresse</h3>
-						<?php echo $member->way_num; ?>
-						<?php echo $member->way_type; ?>
-						<?php echo $member->way_name; ?><br />
-						<?php echo $member->zip_code; ?>
-						<?php echo $member->city; ?>
-						<h3>Inscrit depuis le</h3>
-						<?php echo $member->register_date; ?><br />
-						<a href="#" class="btn btn-lg btn-primary" style="margin-top: 30px;">Éditer</a>
-=======
 							<div class="form-group">
 								<label class="col-sm-2 control-label">Prénom</label>
 								<div class="col-sm-10">
@@ -241,22 +223,14 @@
 							</div>
 
 						</form>
->>>>>>> Stashed changes
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
-<<<<<<< Updated upstream
-	else {
-		App::getHeader(404, $msg);
-	}
-=======
 <?php
 		endif;
 	else :
 		App::getHeader(404);
 	endif;
->>>>>>> Stashed changes
 ?>
