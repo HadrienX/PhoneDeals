@@ -1,7 +1,5 @@
 <div class="col-md-12">
-	<h1>Liste des commandes
-		<a href="index.php?page=admin/add-order" class="btn btn-primary pull-right">Ajouter une commande</a>
-	</h1>
+	<h1>Liste des commandes</h1>
 	<table class="table table-striped">
 		<thead>
 			<th>Membre</th>
@@ -10,7 +8,6 @@
 			<th>Prix TTC</th>
 			<th>Méthode d'envoi</th>
 			<th>Téléphone</th>
-			<th></th>
 			<th></th>
 		</thead>
 		<?php
@@ -23,13 +20,11 @@
 					echo '<td>' . $order->sent_method . '</td>';
 					echo '<td>' . $order->phones . '</td>';
 
-					echo '<td><a href="index.php?page=admin/order-edit&amp;id=' . $order->id . '"><i class="fa fa-pencil" data-toggle="tooltip" title="Modifier"></i></a></td>';
 					echo '<td><a href="#" title="Supprimer" data-toggle="tooltip" data-action="delete" title="Supprimer"><i class="fa fa-trash"></i></a></td>';
 				echo '</tr>';
 			}
 		?>
 	</table>
-	<a href="index.php?page=admin/add-order" class="btn btn-primary">Ajouter une commande</a>
 </div>
 <script>
 	$('[data-action="delete"]').click(function(e) {
