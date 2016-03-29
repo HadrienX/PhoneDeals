@@ -25,14 +25,21 @@
 	$sort = array(
 		'brand' => null,
 		'color' => null,
-		'capacity' => null
+		'capacity' => null,
+		'search' => null
 	);
 
 	$toaddurl = array (
 		'brand' => '',
 		'color' => '',
-		'capacity' => ''
+		'capacity' => '',
+		'search' => ''
 	);
+
+	if (isset($_POST['search'])) {
+		$sort['search'] = htmlentities($_POST['search']);
+		$toaddurl['search'] = '&search=' . $sort['search'];
+	}
 
 	if (isset($_GET['brand'])) {
 		$sort['brand'] = htmlentities($_GET['brand']);
@@ -80,9 +87,9 @@
 	</div>
 
 	<div class="row">
-		<form class="col-md-6 navbar-form inline-form">
+		<form class="col-md-6 navbar-form inline-form" method="POST" action="index.php?page=list">
             <div class="form-group">
-              <input type="search" class="input-sm form-control" placeholder="Recherche">
+              <input type="search" class="input-sm form-control" name="search" placeholder="Recherche">
               <button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-eye-open"></span> Chercher</button>
             </div>
         </form>
