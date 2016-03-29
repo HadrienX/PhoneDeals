@@ -24,11 +24,14 @@
 			$_SESSION['cart'] = $cart;
 			$_SESSION['cart']['phone_total'] = $_SESSION['cart']['phone_total'] + 1;
 			$_SESSION['cart']['price_total'] = $_SESSION['cart']['price_total'] + $phone->price;
-			echo count($_SESSION['cart']['price_total']);
+			
+			$msg->success('Le téléphone a bien été ajouté au panier.', 'index.php?page=cart');
 		}
+
 		elseif ($_POST['action'] == 'remove') {
 			unset($_SESSION['cart']['phones'][$_POST['id']]);
 		}
+
 		else {
 			echo 'Erreur';
 		}

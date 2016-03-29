@@ -97,3 +97,9 @@
 				</div>
 			</div>
 		</nav>
+
+		<?php
+			if ($msg->hasMessages()) {
+				$msg->display();
+			}
+		?>

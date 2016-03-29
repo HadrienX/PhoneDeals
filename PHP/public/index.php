@@ -16,6 +16,8 @@
 	session_start();
 	ob_start();
 
+	$msg = new FlashMessages();
+
 	if (empty($_GET['page'])) {
 		$_GET['page'] = 'home';
 	}
