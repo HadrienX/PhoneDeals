@@ -65,7 +65,20 @@
 						<li<?php App::isCurrentPage('about'); ?>><a href="index.php?page=about">À propos</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="index.php?page=cart"><i class="fa fa-shopping-cart"></i> <?php echo $_SESSION['cart']['phone_total']; ?></a></li>
+						<li>
+							<a href="index.php?page=cart">
+								<i class="fa fa-shopping-cart"></i>
+								<?php
+									if ($_SESSION['cart']) {
+										echo $_SESSION['cart']['phone_total'];
+									}
+
+									else {
+										echo '0';
+									}
+								?>
+							</a>
+						</li>
 						<?php if (App::isLogged()) : ?>
 							<?php $member = Member::getMemberById($_SESSION['id']); ?>
 							<li class="dropdown">
