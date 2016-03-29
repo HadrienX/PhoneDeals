@@ -18,17 +18,22 @@
 			array_push($cart['phones'], array(
 				'id' => (int) $phone->id,
 				'name' => $phone->name,
-				'price' => (int) $phone->price
+				'price' => (int) $_POST['price'],
+				'amount' => (int) $_POST['amount'],
+				'capacity' => (int) $_POST['capacity'],
+				'color' => (int) $_POST['color']
 			));
 			// On précise que les données entrés précédement correspondent à la variable $cart pour les ajouter dans la session
 			$_SESSION['cart'] = $cart;
-			$_SESSION['cart']['phone_total'] = $_SESSION['cart']['phone_total'] + 1;
+			$_SESSION['cart']['phone_total'] = $_SESSION['cart']['phone_total'] + $_POST['amount'];
 			$_SESSION['cart']['price_total'] = $_SESSION['cart']['price_total'] + $phone->price;
 			
 			$msg->success('Le téléphone a bien été ajouté au panier.', 'index.php?page=cart');
 		}
 
 		elseif ($_POST['action'] == 'remove') {
+			$_SESSION['cart']['phone_total'] = $_SESSION['cart']['phone_total'] - $_SESSION['cart']['phones'][$_POST['id']]['amount'];
+			$_SESSION['cart']['price_total'] = $_SESSION['cart']['price_total'] - $_SESSION['cart']['phones'][$_POST['id']]['price'];
 			unset($_SESSION['cart']['phones'][$_POST['id']]);
 		}
 
@@ -40,6 +45,7 @@
 	else {
 		$empty = true;
 		$phonesTotal = 0;
+
 		if (isset($_SESSION['cart']['phones']) && !empty($_SESSION['cart']['phones'])) {
 			$empty = false;
 			$phonesTotal = $_SESSION['cart']['phone_total'];
@@ -88,6 +94,11 @@
 					?>
 				</tbody>
 			</table>
+
+			<a href="#" class="btn btn-primary">
+				<i class="fa fa-shopping-basket" style="padding-right: 7px;"></i>
+				Passer la commande
+			</a>
 		</div>
 	</div>
 </div>
