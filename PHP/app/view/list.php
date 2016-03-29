@@ -80,7 +80,13 @@
 	</div>
 
 	<div class="row">
-		<nav class="col-md-12">
+		<form class="col-md-6 navbar-form inline-form">
+            <div class="form-group">
+              <input type="search" class="input-sm form-control" placeholder="Recherche">
+              <button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-eye-open"></span> Chercher</button>
+            </div>
+        </form>
+		<nav class="col-md-6 pull-right">
 			<ul class="pagination pull-right">
 				<?php		
 					for ($i = 1 ; $i <= $totalPages ; $i++) {
