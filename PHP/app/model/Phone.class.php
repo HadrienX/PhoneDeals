@@ -52,32 +52,48 @@
 		}
 
 		public static function getPhonesListPaginate($start, $limit, $sort) {
-			$brand = "brand != ''";
-			$color = "color != ''";
-			$capacity = "capacity != ''";
+			if($sort['search']){
+				$search = 'name LIKE "%' . $sort['search'] . '%"';
 
-			if($sort['brand']){
-				$brand = 'brand = ' . Brand::getBrandIdByName($sort['brand']);
+				PDOConnexion::setParameters('phonedeals', 'root', 'root');
+				$db = PDOConnexion::getInstance();
+				$sql = "SELECT * FROM phone WHERE $search LIMIT $start, $limit";
+				$sth = $db->prepare($sql);
+				$sth->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Phone');
+				$sth->execute();
+
+				// App::dd($sth->fetchAll());
+				
+				return $sth->fetchAll();
 			}
+			else{
+				$brand = "brand != ''";
+				$color = "color != ''";
+				$capacity = "capacity != ''";
 
-			if($sort['color']){
-				$color = 'color LIKE "%' . $sort['color'] . '%"';
+				if($sort['brand']){
+					$brand = 'brand = ' . Brand::getBrandIdByName($sort['brand']);
+				}
+
+				if($sort['color']){
+					$color = 'color LIKE "%' . $sort['color'] . '%"';
+				}
+
+				if($sort['capacity']){
+					$capacity = 'capacity LIKE "%' . $sort['capacity'] . '%"';
+				}
+
+				PDOConnexion::setParameters('phonedeals', 'root', 'root');
+				$db = PDOConnexion::getInstance();
+				$sql = "SELECT * FROM phone WHERE $brand AND $color AND $capacity LIMIT $start, $limit";
+				$sth = $db->prepare($sql);
+				$sth->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Phone');
+				$sth->execute();
+
+				// App::dd($sth->fetchAll());
+				
+				return $sth->fetchAll();
 			}
-
-			if($sort['capacity']){
-				$capacity = 'capacity LIKE "%' . $sort['capacity'] . '%"';
-			}
-
-			PDOConnexion::setParameters('phonedeals', 'root', 'root');
-			$db = PDOConnexion::getInstance();
-			$sql = "SELECT * FROM phone WHERE $brand AND $color AND $capacity LIMIT $start, $limit";
-			$sth = $db->prepare($sql);
-			$sth->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Phone');
-			$sth->execute();
-
-			// App::dd($sth->fetchAll());
-			
-			return $sth->fetchAll();
 		}
 
 		public static function homePhones() {
