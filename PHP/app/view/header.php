@@ -69,7 +69,7 @@
 							<a href="index.php?page=cart">
 								<i class="fa fa-shopping-cart"></i>
 								<?php
-									if ($_SESSION['cart']) {
+									if (isset($_SESSION['cart'])) {
 										echo $_SESSION['cart']['phone_total'];
 									}
 
