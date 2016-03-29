@@ -62,7 +62,7 @@
 			return $url;
 		}
 
-		public static function getHeader($code) {
+		public static function getHeader($code, $msg = '') {
 			require_once(APP . '/view/header.php');
 
 			switch ($code) {
