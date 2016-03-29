@@ -81,5 +81,23 @@
 				':id' => $id
 			));
 		}
+
+		public static function changePassword($password, $id) {
+			PDOConnexion::setParameters('phonedeals', 'root', 'root');
+			$db = PDOConnexion::getInstance();
+			$sql = "
+				UPDATE member
+				SET password = :password
+				WHERE id = :id
+			";
+			$sth = $db->prepare($sql);
+			$sth->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Member');
+			$sth->execute(array(
+				':password' => $password,
+				':id' => $id
+			));
+			
+			return $sth;
+		}
 	}
 ?>
