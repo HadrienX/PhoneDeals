@@ -6,10 +6,11 @@
 		if (isset($_POST['edit'])){
 			if(isset($_POST['name']) && preg_match("#^[a-zA-Z0-9]{2,32}#", $_POST['name']) &&
 				isset($_POST['brand']) && preg_match("#^[0-9]{1}#", $_POST['brand']) &&
-				isset($_POST['capacity']) && is_numeric($_POST['capacity']) &&
+				isset($_POST['capacity']) &&
 				isset($_POST['price']) && preg_match("#^[0-9]#", $_POST['price']) &&
 				isset($_POST['color']) &&
 				isset($_POST['description']) && preg_match("#^[a-zA-Z0-9._-]#", $_POST['description'])) {
+
 				PDOConnexion::setParameters('phonedeals', 'root', 'root');
 				$db = PDOConnexion::getInstance();
 				$sql = "
@@ -50,9 +51,6 @@
 				}
 				if(!preg_match("#^[a-zA-Z0-9._-]#", $_POST['description'])){
 					App::error('Veuillez entrer une description valide.','index.php?page=admin/add-phone');
-				}
-				if(!is_numeric($_POST['capacity'])){
-					App::error('Veuillez choisir une capacité valide.','index.php?page=admin/add-phone');
 				}
 			}
 		}
