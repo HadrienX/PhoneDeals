@@ -52,15 +52,25 @@
 		}
 
 		public static function getPhonesListPaginate($start, $limit, $sort) {
-			$where = '';
+			$brand = "brand != ''";
+			$color = "color != ''";
+			$capacity = "capacity != ''";
 
-			if ($sort['brand'] || $sort['capacity'] || $sort['color']) {
-				$where = 'WHERE brand = ' . Brand::getBrandIdByName($sort['brand']);
+			if($sort['brand']){
+				$brand = 'brand = ' . Brand::getBrandIdByName($sort['brand']);
+			}
+
+			if($sort['color']){
+				$color = 'color LIKE "%' . $sort['color'] . '%"';
+			}
+
+			if($sort['capacity']){
+				$capacity = 'capacity LIKE "%' . $sort['capacity'] . '%"';
 			}
 
 			PDOConnexion::setParameters('phonedeals', 'root', 'root');
 			$db = PDOConnexion::getInstance();
-			$sql = "SELECT * FROM phone $where LIMIT $start, $limit";
+			$sql = "SELECT * FROM phone WHERE $brand AND $color AND $capacity LIMIT $start, $limit";
 			$sth = $db->prepare($sql);
 			$sth->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Phone');
 			$sth->execute();
