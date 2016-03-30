@@ -107,39 +107,46 @@
 		}
 
 		public static function countPhones($sort) {
-			$where = '';
 
-			if ($sort['brand'] || $sort['capacity'] || $sort['color']) {
-				$where = 'WHERE ';
+			if($sort['search']){
+
+				$search = 'name LIKE "%' . $sort['search'] . '%"';
+
+				PDOConnexion::setParameters('phonedeals', 'root', 'root');
+				$db = PDOConnexion::getInstance();
+				$sth = $db->prepare('SELECT COUNT(*) as total FROM phone WHERE ' . $search);
+				$sth->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Phone');
+				$sth->execute();
 				
-				if ($sort['brand']) {
-					$where .= 'brand = ' . Brand::getBrandIdByName($sort['brand']);
-
-					if ($sort['color'] || $sort['capacity']) {
-						$where .= ' && ';
-					}
-				}
-
-				if ($sort['color']) {
-					$where .= 'color = 1';
-
-					if ($sort['capacity']) {
-						$where .= ' && ';
-					}
-				}
-
-				if ($sort['capacity']) {
-					$where .= 'capacity = 16';
-				}
+				return $sth->fetch()->total;
 			}
 
-			PDOConnexion::setParameters('phonedeals', 'root', 'root');
-			$db = PDOConnexion::getInstance();
-			$sth = $db->prepare('SELECT COUNT(*) as total FROM phone ' . $where);
-			$sth->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Phone');
-			$sth->execute();
-			
-			return $sth->fetch()->total;
+			else{
+
+				$brand = "brand != ''";
+				$color = "color != ''";
+				$capacity = "capacity != ''";
+
+				if($sort['brand']){
+					$brand = 'brand = ' . Brand::getBrandIdByName($sort['brand']);
+				}
+
+				if($sort['color']){
+					$color = 'color LIKE "%' . $sort['color'] . '%"';
+				}
+
+				if($sort['capacity']){
+					$capacity = 'capacity LIKE "%' . $sort['capacity'] . '%"';
+				}
+
+				PDOConnexion::setParameters('phonedeals', 'root', 'root');
+				$db = PDOConnexion::getInstance();
+				$sth = $db->prepare('SELECT COUNT(*) as total FROM phone WHERE ' . $brand . ' AND ' . $color . ' AND '. $capacity);
+				$sth->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Phone');
+				$sth->execute();
+				
+				return $sth->fetch()->total;
+			}
 		}
 
 		public static function getLatestPhones() {
