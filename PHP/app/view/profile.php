@@ -4,8 +4,8 @@
 
 		if (isset($_POST['delete'])){
 			if (isset($_POST['password']) && $_POST['password'] == $_POST['password-confirm']) {
-				if (Bcrypt::checkPassword($_POST['password'], $student->password)) {
-					Member::deleteStudent($_SESSION['id']);
+				if (Bcrypt::checkPassword($_POST['password'], $member->password)) {
+					Member::deleteMember($member->id);
 
 					session_unset();
 					$msg->success('Votre compte à bien été supprimé', 'index.php?page=home');
