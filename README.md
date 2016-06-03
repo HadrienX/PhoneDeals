@@ -8,7 +8,7 @@ Membres du groupe :
 - Florian Bidel
 - Aymeric Picot
 - [Ange Kévin Zokpé](https://github.com/Ange-Kevin)
-- [Hadrien Rannou](https://github.com/HadrienX)
+- [Hadrien](https://github.com/HadrienX)
 
 # Cahier des charges
 - ~~Consulter les smartphones par catégories (par exemple, par marques)~~
